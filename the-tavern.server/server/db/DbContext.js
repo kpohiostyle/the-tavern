@@ -7,9 +7,9 @@ import CharacterSchema from '../models/Character'
 
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
-  Job = mongoose.model('Value', JobSchema);
-  Question = mongoose.model('Value', QuestionSchema);
-  Character = mongoose.model('Value', CharacterSchema);
+  Jobs = mongoose.model('Value', JobSchema);
+  Questions = mongoose.model('Value', QuestionSchema);
+  Characters = mongoose.model('Value', CharacterSchema);
   Account = mongoose.model('Account', AccountSchema);
 }
 
