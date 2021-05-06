@@ -6,10 +6,10 @@ const Race = new Schema({
   value: { type: String, required: true }
 })
 
-const SubJob = new Schema({
-  body: { type: String, required: true },
-  value: { type: String, required: true }
-})
+// const SubJob = new Schema({
+//   body: { type: String, required: true },
+//   value: { type: String, required: true }
+// })
 
 // style(weapons, balance, magic)
 const Job = new Schema(
@@ -22,8 +22,8 @@ const Job = new Schema(
     creatorId: { type: String, ref: 'Account', required: true },
     // NOTE races and subJobs are sub-docs
     // background: { type: Array },
-    races: [Race],
-    subJobs: [SubJob]
+    races: [Race]
+    // subJobs: [SubJob]
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
