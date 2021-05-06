@@ -9,7 +9,6 @@ export class QuestionsController extends BaseController {
       .get('', this.getQuestions)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createQuestion)
-      .post('/:id/answers', this.addAnswer)
       .put('/:id', this.editQuestion)
       .use(Auth0Provider.getAuthorizedUserInfo)
   }
@@ -38,15 +37,6 @@ export class QuestionsController extends BaseController {
       req.body.id = req.params.id
       const data = await questionsService.editQuestion(req.body)
       return res.send(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async addAnswer(req, res, next) {
-    try {
-      const question = await questionsService.createAnswer(req.params.id, req.body)
-      return res.send(question)
     } catch (error) {
       next(error)
     }

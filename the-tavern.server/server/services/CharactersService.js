@@ -20,7 +20,7 @@ class CharactersService {
   }
 
   async deleteCharacter(id, userId) {
-    const data = await dbContext.Characters.findOne({ _id: id, creatorId: userId })
+    const data = await dbContext.Characters.findOneAndDelete({ _id: id, creatorId: userId })
     if (!data) {
       throw new BadRequest('Invalid Character')
     }
