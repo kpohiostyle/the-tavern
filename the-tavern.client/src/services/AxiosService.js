@@ -6,7 +6,7 @@ export const api = Axios.create({
 })
 
 export const dungeonApi = Axios.create({
-  baseUrl: 'https://www.dnd5eapi.co/api/',
+  baseURL: 'https://www.dnd5eapi.co/api/',
   timeout: 3000
 })
 export const setBearer = function(bearer) {
