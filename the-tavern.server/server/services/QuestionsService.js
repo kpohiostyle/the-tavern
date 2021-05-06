@@ -19,14 +19,6 @@ class QuestionsService {
     }
     return question
   }
-
-  async createAnswer(questionId, body) {
-    const updated = await dbContext.Questions.findByIdAndUpdate({ _id: questionId }, { $push: { answers: body } }, { new: true })
-    if (!updated) {
-      throw new BadRequest('invalid id')
-    }
-    return await this.findById(questionId)
-  }
 }
 
 export const questionsService = new QuestionsService()
