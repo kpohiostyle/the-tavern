@@ -5,14 +5,14 @@ export class QuestionsController extends BaseController {
   constructor() {
     super('api/questions')
     this.router
-      .get('', this.getAll)
+      .get('', this.getQuestions)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .post('', this.create)
+      .post('', this.createQuestion)
       .put('/:id', this.editQuestion)
       .use(Auth0Provider.getAuthorizedUserInfo)
   }
 
-  async getAll(req, res, next) {
+  async getQuestions(req, res, next) {
     try {
       return res.send(['question1', 'question2'])
     } catch (error) {
@@ -20,7 +20,7 @@ export class QuestionsController extends BaseController {
     }
   }
 
-  async create(req, res, next) {
+  async createQuestion(req, res, next) {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorId = req.userInfo.id
