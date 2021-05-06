@@ -8,9 +8,9 @@ export class CharactersController extends BaseController {
     this.router
     // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .put('', this.editCharacter)
-      .post('', this.createCharacter)
       .get('', this.getCharacters)
+      .post('', this.createCharacter)
+      .put('/:id', this.editCharacter)
       .delete('/:id', this.deleteCharacter)
   }
 

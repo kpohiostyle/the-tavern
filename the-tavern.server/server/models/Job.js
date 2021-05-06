@@ -19,7 +19,6 @@ const Job = new Schema(
     // style(weapons, balance, magic)
     style: { type: String, required: true },
     title: { type: String, required: true },
-    creatorId: { type: String, ref: 'Account', required: true },
     // NOTE races and subJobs are sub-docs
     // background: { type: Array },
     races: [Race]

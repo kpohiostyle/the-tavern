@@ -6,11 +6,21 @@ export class JobsController extends BaseController {
   constructor() {
     super('api/jobs')
     this.router
-      .get('/:id', this.getJob)
+      .get('', this.getAllJobs)
+      .get('', this.getJob)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createJob)
       .put('/:id', this.editJob)
       .use(Auth0Provider.getAuthorizedUserInfo)
+  }
+
+  async getAllJobs(req, res, next) {
+    try {
+      const jobs = await jobsService.getAllJobs(req.query)
+      return res.send(jobs)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getJob(req, res, next) {
@@ -24,8 +34,8 @@ export class JobsController extends BaseController {
 
   async createJob(req, res, next) {
     try {
-      // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
-      res.send(req.body)
+      const job = await jobsService.createJob(req.body)
+      res.send(job)
     } catch (error) {
       next(error)
     }
