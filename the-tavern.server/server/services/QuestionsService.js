@@ -13,7 +13,7 @@ class QuestionsService {
 
   // REVIEW questions are sub docs, so we will need to edit this function
   async editQuestion(body) {
-    const question = await dbContext.Questions.findOneAndUpdate(body)
+    const question = await dbContext.Questions.findOneAndUpdate({ _id: body.id }, body, { new: true })
     if (!question) {
       throw new BadRequest('Invalid request')
     }

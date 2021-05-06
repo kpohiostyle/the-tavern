@@ -2,6 +2,11 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class JobsService {
+  async getAllJobs(query = {}) {
+    const bugs = await dbContext.Jobs.find(query)
+    return bugs
+  }
+
   async getJob(query) {
     const job = await dbContext.Jobs.findOne({ role: query.role, style: query.style })
     if (!job) {
