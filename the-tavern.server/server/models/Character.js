@@ -3,7 +3,6 @@ const Schema = mongoose.Schema
 
 const Character = new Schema(
   {
-    profileId: { type: String, ref: 'Account', required: true },
     creatorId: { type: String, ref: 'Account', required: true },
     job: { type: String, required: true },
     race: { type: String, required: true },

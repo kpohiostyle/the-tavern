@@ -5,22 +5,12 @@ const Race = new Schema({
   body: { type: String, required: true },
   value: { type: String, required: true }
 })
-Race.virtual('creator', {
-  localField: 'creatorId',
-  ref: 'Account',
-  foreignField: '_id',
-  justOne: true
-})
+
 const SubJob = new Schema({
   body: { type: String, required: true },
   value: { type: String, required: true }
 })
-SubJob.virtual('creator', {
-  localField: 'creatorId',
-  ref: 'Account',
-  foreignField: '_id',
-  justOne: true
-})
+
 // style(weapons, balance, magic)
 const Job = new Schema(
   {
@@ -37,12 +27,5 @@ const Job = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
-
-Job.virtual('creator', {
-  localField: 'creatorId',
-  ref: 'Account',
-  foreignField: '_id',
-  justOne: true
-})
 
 export default Job
