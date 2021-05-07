@@ -12,6 +12,11 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
+    path: '/quiz',
+    name: 'Quiz',
+    component: loadPage('QuizPage')
+  },
+  {
     path: '/dungeon-test',
     name: 'DungeonTest',
     component: loadPage('DungeonTestPage')
