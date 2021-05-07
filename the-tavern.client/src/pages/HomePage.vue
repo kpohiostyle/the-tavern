@@ -1,11 +1,8 @@
 <template>
   <div class="home container">
     <div class="row justify-content-center">
-      <div class="col-12">
-        <h1>Dungeons and Dragons API Test Component</h1>
-      </div>
+      <div class="col-12"></div>
     </div>
-    <DungeonTestComponent />
   </div>
 </template>
 
