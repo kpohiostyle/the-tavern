@@ -17,6 +17,11 @@ const routes = [
     component: loadPage('DungeonTestPage')
   },
   {
+    path: '/access-test',
+    name: 'AccessTest',
+    component: loadPage('AccessTestPage')
+  },
+  {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')

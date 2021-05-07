@@ -2,11 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
+        <h1><span><i class="fas fa-dice-d20"></i></span> The Tavern</h1>
       </div>
     </router-link>
     <button
@@ -30,6 +26,11 @@
         <li class="nav-item">
           <router-link :to="{ name: 'DungeonTest' }" class="nav-link">
             Dungeon Test
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link :to="{ name: 'AccessTest' }" class="nav-link">
+            Accessibility
           </router-link>
         </li>
       </ul>
