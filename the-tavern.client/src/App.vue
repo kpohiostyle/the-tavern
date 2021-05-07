@@ -6,8 +6,8 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center pt-4 pb-3">
-      <h6>Made with <span><i class="fas fa-dice-d20"></i></span> by a bunch of nerds</h6>
+    <div class="bg-dark text-light text-center pt-4 pb-2">
+      <p>Made with <span><i class="fas fa-dice-d20"></i></span> by a bunch of nerds</p>
     </div>
   </footer>
 </template>
