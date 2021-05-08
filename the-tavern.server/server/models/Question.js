@@ -9,7 +9,7 @@ const Answer = new Schema({
 const Question = new Schema(
   {
     number: { type: Number, required: true },
-    query: { type: String, required: true },
+    body: { type: String, required: true },
     answers: [Answer]
 
   },
