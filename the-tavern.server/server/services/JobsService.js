@@ -3,8 +3,8 @@ import { BadRequest } from '../utils/Errors'
 
 class JobsService {
   async getAllJobs(query = {}) {
-    const bugs = await dbContext.Jobs.find(query)
-    return bugs
+    const jobs = await dbContext.Jobs.find(query)
+    return jobs
   }
 
   async getJob(query) {
