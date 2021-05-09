@@ -1,17 +1,19 @@
 import mongoose from 'mongoose'
-import ValueSchema from '../models/Value'
 import AccountSchema from '../models/Account'
 import JobSchema from '../models/Job'
 import RaceSchema from '../models/Race'
 import BackgroundSchema from '../models/Background'
+import WeaponSchema from '../models/Weapon'
+import ArmorSchema from '../models/Armor'
 import QuestionSchema from '../models/Question'
 import CharacterSchema from '../models/Character'
 
 class DbContext {
-  Values = mongoose.model('Value', ValueSchema);
   Jobs = mongoose.model('Job', JobSchema);
   Races = mongoose.model('Race', RaceSchema);
   Backgrounds = mongoose.model('Background', BackgroundSchema);
+  Weapons = mongoose.model('Weapon', WeaponSchema);
+  Armor = mongoose.model('Armor', ArmorSchema);
   Questions = mongoose.model('Question', QuestionSchema);
   Characters = mongoose.model('Character', CharacterSchema);
   Account = mongoose.model('Account', AccountSchema);
