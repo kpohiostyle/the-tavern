@@ -1,23 +1,29 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const Answer = new Schema({
-  body: { type: String, required: true },
-  value: { type: String, required: true }
+const Item = new Schema({
+  title: { type: String }
+})
+
+const Option = new Schema({
+  title: { type: String },
+  body: { type: String },
+  value: { type: String },
+  choose: { type: Number },
+  from: [Item]
+})
+
+const Choice = new Schema({
+  title: { type: String },
+  options: [Option]
 })
 
 const SubJob = new Schema({
-  body: { type: String, required: true },
-  answers: [Answer]
-})
-
-const Background = new Schema({
-  value: { type: String, required: true }
-})
-
-const Race = new Schema({
-  body: { type: String, required: true },
-  value: { type: String, required: true }
+  title: { type: String },
+  level: { type: Number },
+  equipment: [Option],
+  abilities: [Option],
+  proficiencies: [Choice]
 })
 
 const Job = new Schema(
@@ -28,9 +34,15 @@ const Job = new Schema(
     // style(weapons, balance, magic)
     style: { type: String, required: true },
     // NOTE races and subJobs are sub-docs
-    races: [Race],
-    backgrounds: [Background],
-    subJobs: { SubJob }
+    races: [Option],
+    backgrounds: [Item],
+    subChoices: { Choice },
+    hp: { type: Number },
+    proficiencies: [Choice],
+    equipment: [Option],
+    abilities: [Option],
+    spellcasting: { type: String },
+    subJobs: [SubJob]
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
