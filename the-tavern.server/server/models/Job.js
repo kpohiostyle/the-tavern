@@ -31,9 +31,21 @@ const SubJob = new Schema({
     body: { type: String }
   },
   proficiencies: {
-    skills: { type: Array },
+    skills: {
+      choose: { type: Number },
+      from: { type: Array },
+      expertise: { type: Array }
+    },
+    tools: { type: Array },
+    languages: { type: Array },
     armor: { type: Array },
     weapons: { type: Array }
+  },
+  spells: { type: Array },
+  cantrips: {
+    type: Array,
+    choose: { type: Number },
+    from: { type: Array }
   }
 })
 
@@ -51,13 +63,18 @@ const Job = new Schema(
     proficiencies: {
       skills: {
         choose: { type: Number },
-        from: { type: Array }
+        from: { type: Array },
+        expertise: {
+          choose: { type: Number },
+          from: { type: Array }
+        }
       },
       armor: { type: Array },
       weapons: { type: Array },
       tools: { type: Array },
       saves: { type: Array }
     },
+    languages: { type: Array },
     abilities: {
       type: Array,
       title: { type: String },
@@ -67,10 +84,13 @@ const Job = new Schema(
     },
     spellcasting: {
       ability: { type: String },
-      slots: { type: Number },
       spells: { type: Number },
-      cantrips: { type: Number }
+      spellsRec: { type: Array },
+      cantrips: { type: Number },
+      cantripsRec: { type: Array },
+      slots: { type: Number }
     },
+    tools: { type: Array },
     subChoices: {
       query: { type: String },
       answers: {
@@ -79,7 +99,6 @@ const Job = new Schema(
         value: { type: String }
       }
     },
-    tools: { type: Array },
     equipment: {
       type: Array,
       choices: [Choice]
