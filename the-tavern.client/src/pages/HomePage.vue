@@ -3,9 +3,9 @@
     <div class="row justify-content-center">
       <div class="col-md-8 col-12 p-md-5">
         <div class="shadow bg-light text-center m-3 p-md-5 p-4">
-          <h2><u>Welcome to The Tavern</u></h2>
+          <h2><u>Welcome Weary Traveller!</u></h2>
           <p>
-            An intuitive interactive character creation experience for Dungeons and Dragons 5th Edition, designed for aspiring adventurers!
+            The Tavern is an interactive character creation experience for Dungeons and Dragons 5th Edition, designed for aspiring adventurers!
           </p>
           <p class="d-md-block d-none">
             Follow the promps to easily create your ideal character and jumpstart your adventure!
@@ -73,7 +73,7 @@ export default {
 
 <style scoped lang="scss">
  h2 {
-   font-size: 3rem;
+   font-size: 2.5rem;
  }
  p {
    font-size: 2rem;
