@@ -36,6 +36,8 @@ const Ability = new Schema({
 const Character = new Schema(
   {
     creatorId: { type: String, ref: 'Account', required: true },
+    role: { type: String },
+    style: { type: String },
     job: { type: String, required: true },
     race: { type: String, required: true },
     name: { type: String, required: true },

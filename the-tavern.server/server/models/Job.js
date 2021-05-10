@@ -3,24 +3,11 @@ const Schema = mongoose.Schema
 
 const Equipment = new Schema({
   armor: {
-    type: Array,
-    title: { type: String },
-    armor: {
-      min: { type: Number },
-      max: { type: Number }
-    },
-    properties: { type: Array }
+    type: Array
   },
   weapon: {
     type: Array
   }
-})
-
-const Choice = new Schema({
-  type: Array,
-  first: [Equipment],
-  second: [Equipment],
-  third: [Equipment]
 })
 
 const SubJob = new Schema({
@@ -101,7 +88,12 @@ const Job = new Schema(
     },
     equipment: {
       type: Array,
-      choices: [Choice]
+      choices: {
+        type: Array,
+        first: [Equipment],
+        second: [Equipment],
+        third: [Equipment]
+      }
     },
     subJobs: [SubJob]
   },
