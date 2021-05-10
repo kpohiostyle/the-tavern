@@ -32,7 +32,7 @@ export default {
       async select(answer) {
         try {
           if (await Notification.confirmAction()) {
-            quizService.nextQuestion(state.question.number, answer)
+            quizService.nextQuestion(answer, state.question.number)
           }
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')

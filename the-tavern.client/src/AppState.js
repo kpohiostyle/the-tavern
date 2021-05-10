@@ -16,6 +16,10 @@ export const AppState = reactive({
     spells: 0,
     balance: 0
   },
+  count: {
+    role: 0,
+    style: 0
+  },
   character: {},
   rawData: []
 })

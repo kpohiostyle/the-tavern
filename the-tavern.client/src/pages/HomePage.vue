@@ -45,15 +45,20 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
+import { quizService } from '../services/QuizService'
 
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
       loading: true,
+      results: computed(() => AppState.results),
       quiz: computed(() => AppState.quiz)
+    })
+    onMounted(async() => {
+      quizService.resetResults()
     })
     return {
       state
