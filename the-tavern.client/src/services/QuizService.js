@@ -8,14 +8,13 @@ class QuizService {
     AppState.question = AppState.quiz[0]
   }
 
-  nextQueston(num, answer) {
-    // AppState.results[answer]++
-    //   if (num == 4) {
-    //       for (let i = 0; i < 3; i++) {
-
-    //       }
-    // }
-  }
+  // nextQueston(num, answer) {
+  //   AppState.results[answer]++
+  //   if (num == 4) {
+  //     for (let i = 0; i < 3; i++) {
+  //     }
+  //   }
+  // }
 }
 
 export const quizService = new QuizService()
