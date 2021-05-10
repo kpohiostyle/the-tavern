@@ -76,7 +76,7 @@
             </div>
           </div>
           <!-- These will be displayed dynamically through v-ifs -->
-          <div id="styles" class="d-none">
+          <div id="styles" class="">
             <div id="weapons">
               <h3 class="mb-0 text-left">
                 Weapons
