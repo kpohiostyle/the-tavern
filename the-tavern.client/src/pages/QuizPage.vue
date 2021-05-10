@@ -132,6 +132,8 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
+import { quizService } from '../services/QuizService'
+import Notification from '../utils/Notification'
 
 export default {
   name: 'QuizPage',
@@ -139,11 +141,15 @@ export default {
     const state = reactive({
       loading: true,
       question: computed(() => AppState.question),
-      roles: computed(() => AppState.roles),
-      styles: computed(() => AppState.styles)
+      results: computed(() => AppState.results)
     })
     onMounted(async() => {
-
+      try {
+        await quizService.getQuestions()
+        state.loading = false
+      } catch (error) {
+        Notification.toast('Error: ' + error, 'error')
+      }
     })
     return {
       state
