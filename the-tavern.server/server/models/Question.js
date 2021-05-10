@@ -1,16 +1,15 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const Answer = new Schema({
-  body: { type: String, required: true },
-  value: { type: String, required: true }
-})
-
 const Question = new Schema(
   {
     number: { type: Number, required: true },
-    body: { type: String, required: true },
-    answers: [Answer]
+    query: { type: String, required: true },
+    answers: {
+      type: Array,
+      body: { type: String, required: true },
+      value: { type: String, required: true }
+    }
 
   },
   { timestamps: true, toJSON: { virtuals: true } }
