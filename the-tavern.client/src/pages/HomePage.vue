@@ -45,10 +45,8 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { quizService } from '../services/QuizService'
-import Notification from '../utils/Notification'
 
 export default {
   name: 'Home',
@@ -56,13 +54,6 @@ export default {
     const state = reactive({
       loading: true,
       quiz: computed(() => AppState.quiz)
-    })
-    onMounted(async() => {
-      try {
-        await quizService.getQuestions()
-      } catch (error) {
-        Notification.toast('Error: ' + error, 'error')
-      }
     })
     return {
       state
