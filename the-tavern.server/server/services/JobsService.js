@@ -2,17 +2,12 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class JobsService {
-  async getAllJobs(query = {}) {
-    const jobs = await dbContext.Jobs.find(query)
-    return jobs
-  }
-
-  async getJob(query = {}) {
-    const job = await dbContext.Jobs.findOne(query)
-    if (!job) {
+  async getJobs(query = {}) {
+    const res = await dbContext.Jobs.find(query)
+    if (!res) {
       throw new BadRequest('Invalid Query')
     }
-    return job
+    return res
   }
 
   async createJob(body) {
