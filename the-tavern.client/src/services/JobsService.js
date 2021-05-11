@@ -2,10 +2,10 @@ import { AppState } from '../AppState'
 import { api } from './AxiosService'
 
 class JobsService {
-  async getJob(query) {
-    const res = await api.get(`api/jobs/${query}`)
+  async getJob(job) {
+    const res = await api.get(`api/jobs?title=${job.title}`)
     AppState.job = res.data
-    console.log(res)
+    console.log(AppState.job)
   }
 }
 

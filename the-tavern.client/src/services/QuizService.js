@@ -5,12 +5,14 @@ import { jobsService } from './JobsService'
 
 class QuizService {
   async getQuestions() {
+    // TODO rename quiz to res (question to res.data)
     const quiz = await api.get('api/questions')
     AppState.quiz = quiz.data
     AppState.question = AppState.quiz[0]
   }
 
   async nextQuestion(str, num) {
+    // FIXME abstract logic DOM manipulation in service == bad
     const string = str.toLowerCase()
     AppState.results[string]++
     if (num < 6) {
@@ -30,6 +32,7 @@ class QuizService {
       await this.jobQuestion()
     } else {
       if (num === 5) {
+        // NOTE hides progress bars
         document.getElementById('tank').classList.add('d-none')
         document.getElementById('damage').classList.add('d-none')
         document.getElementById('support').classList.add('d-none')
@@ -42,6 +45,7 @@ class QuizService {
   }
 
   async checkResults(num) {
+    // REVIEW do we need this? Rename?
     const refined = []
     let a = 0
     let b = 4
@@ -72,16 +76,26 @@ class QuizService {
   }
 
   clarifyQuestion(num, arr) {
+    // REVIEW rename to limit options? (tiebreaker only)
     const temp = AppState.quiz[num + 1]
     temp.answers = temp.answers.filter(a => a.value === arr[0] || a.value === arr[1])
     AppState.question = temp
   }
 
   async jobQuestion() {
-    await jobsService.getJob(AppState.character)
+    // FIXME DOM manipulation
+    const job = AppState.jobs.find(j => j.role === AppState.character.role && j.style === AppState.character.style)
+    console.log(job)
+    await jobsService.getJob(job)
+
+    document.getElementById('weapons').classList.add('d-none')
+    document.getElementById('spells').classList.add('d-none')
+    document.getElementById('balance').classList.add('d-none')
+    document.getElementById(AppState.character.style.toLowerCase()).classList.remove('d-none')
   }
 
   resetResults() {
+    // REVIEW put in a single place and reference (set a default)
     AppState.results = {
       tank: 0,
       damage: 0,

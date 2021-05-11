@@ -7,7 +7,7 @@ export class JobsController extends BaseController {
     super('api/jobs')
     this.router
       .get('', this.getAllJobs)
-      .get(':query', this.getJob)
+      .get('', this.getJob)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createJob)
       .put('/:id', this.editJob)
@@ -25,7 +25,7 @@ export class JobsController extends BaseController {
 
   async getJob(req, res, next) {
     try {
-      const data = await jobsService.getJob(req.query)
+      const data = await jobsService.getJob({ title: req.query.title })
       return res.send(data)
     } catch (error) {
       next(error)

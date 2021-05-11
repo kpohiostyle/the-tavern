@@ -7,8 +7,8 @@ class JobsService {
     return jobs
   }
 
-  async getJob(query) {
-    const job = await dbContext.Jobs.find(query)
+  async getJob(query = {}) {
+    const job = await dbContext.Jobs.findOne(query)
     if (!job) {
       throw new BadRequest('Invalid Query')
     }
