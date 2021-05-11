@@ -7,8 +7,6 @@ class QuizService {
     const quiz = await api.get('api/questions')
     AppState.quiz = quiz.data
     AppState.question = AppState.quiz[0]
-    console.log(AppState.question)
-    console.log(AppState.quiz)
   }
 
   nextQuestion(str, num) {
@@ -24,12 +22,19 @@ class QuizService {
         AppState.character.style = str
       }
     }
-    console.log(AppState.character)
     if (num === 4 || num === 9) {
       this.checkResults(num)
     } else if (num === 10) {
       router.push('Results')
     } else {
+      if (num === 5) {
+        document.getElementById('tank').classList.add('d-none')
+        document.getElementById('damage').classList.add('d-none')
+        document.getElementById('support').classList.add('d-none')
+        document.getElementById('utility').classList.add('d-none')
+        document.getElementById(AppState.character.role).classList.remove('d-none')
+        document.getElementById('style').classList.remove('d-none')
+      }
       AppState.question = AppState.quiz[num + 1]
     }
   }
@@ -52,6 +57,12 @@ class QuizService {
     if (refined.length === 2) {
       this.clarifyQuestion(num, refined)
     } else if (num === 4) {
+      document.getElementById('tank').classList.add('d-none')
+      document.getElementById('damage').classList.add('d-none')
+      document.getElementById('support').classList.add('d-none')
+      document.getElementById('utility').classList.add('d-none')
+      document.getElementById(AppState.character.role).classList.remove('d-none')
+      document.getElementById('style').classList.remove('d-none')
       AppState.question = AppState.quiz[num + 2]
     } else {
       router.push('Results')
@@ -73,6 +84,10 @@ class QuizService {
       weapons: 0,
       spells: 0,
       balance: 0
+    }
+    AppState.count = {
+      role: 0,
+      style: 0
     }
   }
 }

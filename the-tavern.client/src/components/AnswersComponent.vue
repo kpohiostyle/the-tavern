@@ -1,6 +1,6 @@
 <template>
-  <div class="col-md-6 col-12 p-md-5 p-3" @click="select(answerProp.value)">
-    <div class="bg-light shadow p-3">
+  <div class="col-md-6 col-12 p-md-5 p-3">
+    <div class="bg-light shadow p-3" @click="select(answerProp.value)">
       <h3>{{ answerProp.body }}</h3>
     </div>
   </div>

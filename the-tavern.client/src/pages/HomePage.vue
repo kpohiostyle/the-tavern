@@ -55,7 +55,8 @@ export default {
     const state = reactive({
       loading: true,
       results: computed(() => AppState.results),
-      quiz: computed(() => AppState.quiz)
+      quiz: computed(() => AppState.quiz),
+      character: computed(() => AppState.character)
     })
     onMounted(async() => {
       quizService.resetResults()

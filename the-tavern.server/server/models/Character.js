@@ -1,63 +1,60 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const Item = new Schema({
-  title: { type: String }
-})
-
-const Spell = new Schema({
-  level: { type: Number },
-  uses: { type: Number },
-  title: { type: String }
-})
-
-const Skill = new Schema({
-  title: { type: String },
-  expertise: { type: Boolean }
-})
-
-const Proficiency = new Schema({
-  weapons: [Item],
-  armor: [Item],
-  tools: [Item],
-  skills: [Skill]
-})
-
-const Stat = new Schema({
-  title: { type: String },
-  value: { type: Number }
-})
-
-const Ability = new Schema({
-  title: { type: String },
-  body: { type: String }
-})
-
 const Character = new Schema(
   {
-    creatorId: { type: String, ref: 'Account', required: true },
+    creatorId: { type: String, ref: 'Account' },
     role: { type: String },
     style: { type: String },
-    job: { type: String, required: true },
-    race: { type: String, required: true },
-    name: { type: String, required: true },
-    age: { type: Number, required: true },
-    gender: { type: String, required: true },
-    alignment: { type: String, required: true },
-    size: { type: String, required: true },
-    speed: { type: String, required: true },
-    imgUrl: { type: String },
+    job: { type: String },
+    race: { type: String },
     background: { type: String },
+    name: { type: String },
+    age: { type: Number },
+    gender: { type: String },
+    alignment: { type: String },
+    size: { type: String },
+    speed: { type: String },
+    imgUrl: { type: String },
     health: { type: Number },
     armorRating: { type: Number },
     proBonus: { type: Number },
-    stats: [Stat],
-    languages: [Item],
-    abilities: [Ability],
-    spells: [Spell],
-    slots: [Spell],
-    proficiencies: [Proficiency],
-    equipment: [Proficiency]
+    stats: {
+      type: Array,
+      title: { type: String },
+      value: { type: Number }
+    },
+    languages: { type: Array },
+    abilities: {
+      type: Array,
+      title: { type: String },
+      body: { type: String }
+    },
+    cantrips: {
+      type: Array,
+      title: { type: String }
+    },
+    spells: {
+      type: Array,
+      level: { type: Number },
+      title: { type: String }
+    },
+    slots: { type: Number },
+    proficiencies: {
+      weapons: { type: Array },
+      armor: { type: Array },
+      tools: { type: Array },
+      skills: {
+        type: Array,
+        title: { type: String },
+        expertise: { type: Boolean }
+      }
+    },
+    equipment: {
+      weapons: { type: Array },
+      armor: { type: Array },
+      tools: { type: Array }
+    }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
