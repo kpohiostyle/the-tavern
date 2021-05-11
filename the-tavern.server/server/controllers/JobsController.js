@@ -7,7 +7,7 @@ export class JobsController extends BaseController {
     super('api/jobs')
     this.router
       .get('', this.getAllJobs)
-      .get('', this.getJob)
+      .get(':query', this.getJob)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createJob)
       .put('/:id', this.editJob)

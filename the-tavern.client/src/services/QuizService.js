@@ -1,6 +1,7 @@
 import { AppState } from '../AppState'
-import router from '../router'
+// import router from '../router'
 import { api } from './AxiosService'
+import { jobsService } from './JobsService'
 
 class QuizService {
   async getQuestions() {
@@ -9,7 +10,7 @@ class QuizService {
     AppState.question = AppState.quiz[0]
   }
 
-  nextQuestion(str, num) {
+  async nextQuestion(str, num) {
     const string = str.toLowerCase()
     AppState.results[string]++
     if (num < 6) {
@@ -26,7 +27,7 @@ class QuizService {
     if (num === 4 || num === 9) {
       this.checkResults(num)
     } else if (num === 10) {
-      router.push('Results')
+      await this.jobQuestion()
     } else {
       if (num === 5) {
         document.getElementById('tank').classList.add('d-none')
@@ -40,7 +41,7 @@ class QuizService {
     }
   }
 
-  checkResults(num) {
+  async checkResults(num) {
     const refined = []
     let a = 0
     let b = 4
@@ -66,7 +67,7 @@ class QuizService {
       document.getElementById('style').classList.remove('d-none')
       AppState.question = AppState.quiz[num + 2]
     } else {
-      router.push('Results')
+      await this.jobQuestion()
     }
   }
 
@@ -74,6 +75,10 @@ class QuizService {
     const temp = AppState.quiz[num + 1]
     temp.answers = temp.answers.filter(a => a.value === arr[0] || a.value === arr[1])
     AppState.question = temp
+  }
+
+  async jobQuestion() {
+    await jobsService.getJob(AppState.character)
   }
 
   resetResults() {

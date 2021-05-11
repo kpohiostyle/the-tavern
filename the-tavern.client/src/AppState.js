@@ -20,6 +20,7 @@ export const AppState = reactive({
     role: 0,
     style: 0
   },
+  job: {},
   character: {},
   rawData: []
 })
