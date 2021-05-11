@@ -33,9 +33,7 @@ export default {
       state,
       async select(answer) {
         try {
-          if (await Notification.confirmAction()) {
-            quizService.nextQuestion(answer, state.question.number)
-          }
+          quizService.nextQuestion(answer, state.question.number)
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }
