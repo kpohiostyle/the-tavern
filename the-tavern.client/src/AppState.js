@@ -84,5 +84,6 @@ export const AppState = reactive({
   ],
   job: {},
   character: {},
+  characters: [],
   rawData: []
 })
