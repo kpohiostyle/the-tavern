@@ -10,15 +10,16 @@ class QuizService {
   }
 
   nextQuestion(str, num) {
-    AppState.results[str]++
+    const string = str.toLowerCase()
+    AppState.results[string]++
     if (num < 6) {
-      if (AppState.results[str] > AppState.count.role) {
-        AppState.count.role = AppState.results[str]
+      if (AppState.results[string] > AppState.count.role) {
+        AppState.count.role = AppState.results[string]
         AppState.character.role = str
       }
     } else {
-      if (AppState.results[str] > AppState.count.style) {
-        AppState.count.style = AppState.results[str]
+      if (AppState.results[string] > AppState.count.style) {
+        AppState.count.style = AppState.results[string]
         AppState.character.style = str
       }
     }
@@ -32,7 +33,7 @@ class QuizService {
         document.getElementById('damage').classList.add('d-none')
         document.getElementById('support').classList.add('d-none')
         document.getElementById('utility').classList.add('d-none')
-        document.getElementById(AppState.character.role).classList.remove('d-none')
+        document.getElementById(AppState.character.role.toLowerCase()).classList.remove('d-none')
         document.getElementById('style').classList.remove('d-none')
       }
       AppState.question = AppState.quiz[num + 1]
@@ -50,7 +51,7 @@ class QuizService {
       count = AppState.count.style
     }
     for (let i = a; i < b; i++) {
-      if (AppState.results[AppState.resultsArr[i]] === count) {
+      if (AppState.results[AppState.resultsArr[i].toLowerCase()] === count) {
         refined.push(AppState.resultsArr[i])
       }
     }
@@ -61,7 +62,7 @@ class QuizService {
       document.getElementById('damage').classList.add('d-none')
       document.getElementById('support').classList.add('d-none')
       document.getElementById('utility').classList.add('d-none')
-      document.getElementById(AppState.character.role).classList.remove('d-none')
+      document.getElementById(AppState.character.role.toLowerCase()).classList.remove('d-none')
       document.getElementById('style').classList.remove('d-none')
       AppState.question = AppState.quiz[num + 2]
     } else {
