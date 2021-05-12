@@ -7,6 +7,7 @@ const Character = new Schema(
     role: { type: String },
     style: { type: String },
     job: { type: String },
+    subJob: { type: String },
     race: { type: String },
     background: { type: String },
     name: { type: String },
