@@ -6,27 +6,17 @@ export class RacesController extends BaseController {
   constructor() {
     super('api/races')
     this.router
-      .get('', this.getAllRaces)
-      .get('', this.getRace)
+      .get('', this.getRaces)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createRace)
       .put('/:id', this.editRace)
       .use(Auth0Provider.getAuthorizedUserInfo)
   }
 
-  async getAllRaces(req, res, next) {
+  async getRaces(req, res, next) {
     try {
-      const races = await racesService.getAllRaces(req.query)
+      const races = await racesService.getRaces(req.query)
       return res.send(races)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async getRace(req, res, next) {
-    try {
-      const data = await racesService.getRace(req.query)
-      return res.send(data)
     } catch (error) {
       next(error)
     }

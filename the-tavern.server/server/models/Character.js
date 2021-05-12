@@ -19,10 +19,12 @@ const Character = new Schema(
     health: { type: Number },
     armorRating: { type: Number },
     proBonus: { type: Number },
-    stats: {
+    scores: {
       type: Array,
       title: { type: String },
-      value: { type: Number }
+      value: { type: Number },
+      choose: { type: Number },
+      from: { type: Array }
     },
     languages: { type: Array },
     abilities: {
@@ -30,16 +32,14 @@ const Character = new Schema(
       title: { type: String },
       body: { type: String }
     },
-    cantrips: {
-      type: Array,
-      title: { type: String }
+    spellcasting: {
+      spellAbility: { type: String },
+      totalSpells: { type: Number },
+      spells: { type: Array },
+      totalCantrips: { type: Number },
+      cantrips: { type: Array },
+      slots: { type: Number }
     },
-    spells: {
-      type: Array,
-      level: { type: Number },
-      title: { type: String }
-    },
-    slots: { type: Number },
     proficiencies: {
       weapons: { type: Array },
       armor: { type: Array },

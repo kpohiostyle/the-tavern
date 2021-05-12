@@ -44,8 +44,16 @@ const Job = new Schema(
     // style(weapons, balance, magic)
     style: { type: String },
     // NOTE races and subJobs are sub-docs
-    races: { type: Array },
-    backgrounds: { type: Array },
+    races: {
+      type: Array,
+      body: { type: String },
+      value: { type: String }
+    },
+    backgrounds: {
+      type: Array,
+      body: { type: String },
+      value: { type: String }
+    },
     health: { type: Number },
     proficiencies: {
       skills: {

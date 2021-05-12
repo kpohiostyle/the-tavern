@@ -3,16 +3,24 @@
     <div class="row justify-content-center" v-if="!state.loading">
       <div class="col-md-8 col-12 p-md-5">
         <div class="shadow bg-light text-center m-3 p-md-5 p-4">
-          <h2><u>Test Results</u></h2>
-          <h3>You have selected a {{ state.character.race }} {{ state.character.job }} </h3>
-          <h4>Cantrips:{{ state.character.cantrips }}</h4>
-          <h4>Spells:{{ state.character.spells }}</h4>
-          <h1>BITE ME!!!!!!</h1>
+          <h2><u> You have selected a {{ state.character.race }} {{ state.character.job }}!</u> </h2>
+          <h3>Size: {{ state.character.size }}</h3>
+          <h3>Speed: {{ state.character.speed }}'</h3>
+          <h3>Health: {{ state.character.speed }} Hit Points</h3>
+          <h3>Tools: {{ state.character.equipment.tools }}</h3>
+          <h3>Cantrips: {{ state.character.spellcasting.cantrips }}</h3>
+          <h3>Spells: {{ state.character.spellcasting.spells }}</h3>
+          <h1>BITE ME!</h1>
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
         <div class="shadow bg-light text-center m-3 p-5">
           <h2><u>Character Profile</u></h2>
+          <h3>Party Role: {{ state.character.role }}</h3>
+          <h3>Play Style: {{ state.character.style }}</h3>
+          <h3>Race: {{ state.character.race }}</h3>
+          <h3>Class: {{ state.character.job }}</h3>
+          <h3>Background: {{ state.character.background }}</h3>
         </div>
       </div>
     </div>

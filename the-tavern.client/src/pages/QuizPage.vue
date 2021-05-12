@@ -159,14 +159,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
- h2 {
+h2 {
    font-size: 3rem;
- }
+}
+
 h3 {
     font-size: 2rem;
 }
- p {
+
+p {
    font-size: 2rem;
- }
+}
 
 </style>
