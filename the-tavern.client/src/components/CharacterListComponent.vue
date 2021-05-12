@@ -1,8 +1,18 @@
 <template>
+  <!-- TODO get the toggle to dissappear on anything larger than a medium -->
   <div class=" row justify-content-center text-center p-md-5">
-    <div class="col-12 shadow mb-2 py-2 accordion">
-      <h5><u> Pikachu</u></h5>
-      <p>Pokemon Rodent</p>
+    <div class="col-12 shadow mb-2 py-2">
+      <div @click="state.show = !state.show">
+        <h5>
+          <u> Pikachu</u>
+        </h5>
+        <p>Pokemon Rodent</p>
+        <transition name="fade">
+          <p v-if="state.show">
+            What's new Pikachu??
+          </p>
+        </transition>
+      </div>
     </div>
     <div class="col-12 shadow my-2 py-2">
       <h5><u> Legolas</u></h5>
@@ -10,7 +20,7 @@
     </div>
     <div class="col-12 shadow my-2 py-2">
       <h5><u> Logan</u></h5>
-      <p>Human Dumbass</p>
+      <p>Human Himbo</p>
     </div>
   </div>
 </template>
@@ -27,6 +37,7 @@ export default {
   },
   setup() {
     const state = reactive({
+      show: false,
       characters: computed(() => AppState.characters)
     })
     onMounted(async() => {
@@ -45,14 +56,5 @@ h5{
 }
 p{
   font-size: 1.25rem;
-}
-.accordion{
-  display: none;
-}
-
-@media (min-width: 768px){
-  .accordion{
-    display: block;
-  }
 }
 </style>
