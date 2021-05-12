@@ -6,7 +6,11 @@ export const AppState = reactive({
   account: {},
   quiz: [],
   question: {},
-  questions: [],
+  questions: {
+    role: [],
+    style: [],
+    trade: []
+  },
   activeQuestion: {},
   resultsArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
   results: {},

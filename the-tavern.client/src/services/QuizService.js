@@ -125,6 +125,88 @@ class QuizService {
       style: 0
     }
   }
+
+  async buildCharacter(str, type) {
+    if (type === 'role' || type === 'style') {
+      await this.buildPrimary(str, type)
+    } else {
+      await this.buildSecondary(str, type)
+    }
+  }
+
+  async buildPrimary(str, type) {
+    this.updateCount(str, type)
+    if (AppState.activeQuestion.number === AppState.questions[type].length) {
+      if (type === 'role') {
+        AppState.activeQuestion = AppState.questions.style[0]
+      } else {
+        await resultsService.getJob()
+        AppState.activeQuestion = AppState.questions.trade[0]
+      }
+    } else {
+      AppState.activeQuestion = AppState.questions[type][AppState.activeQuestion.number + 1]
+    }
+  }
+
+  async buildSecondary(str, type) {
+    if (type === 'race') {
+      await resultsService.getRace(str)
+    } else if (type === 'background') {
+      await resultsService.getBackground(str)
+    } else if (type === 'subJob') {
+      AppState.jobs.subJobs = AppState.jobs.subJobs.filter(j => j.title === str)
+    }
+    if (AppState.activeQuestion.number === AppState.questions[type].length) {
+      router.push('Results')
+    } else {
+      AppState.activeQuestion = AppState.questions[type][AppState.activeQuestion.number + 1]
+    }
+  }
+
+  updateCount(str, type) {
+    // eslint-disable-next-line prefer-const
+    let tieBreakers = []
+    AppState.attributes[type][str]++
+    if (AppState.count[type] < AppState.attributes[type][str]) {
+      AppState.count[type] = AppState.attributes[type][str]
+      AppState.character[type] = str
+    }
+    if (AppState.attributes[type][str] === 2) {
+      tieBreakers.push(str)
+      if (tieBreakers.length === 2) {
+        this.tieBreaker(type, tieBreakers)
+      }
+    }
+    if (AppState.attribute[type][str] === 3) {
+      AppState.activeQuestion = AppState.questions[type][AppState.questions[type].length - 1]
+    }
+  }
+
+  tieBreaker(type, arr) {
+    AppState.activeQuestion = AppState.questions[type][AppState.questions[type].length - 2]
+    AppState.activeQuestion.answers = AppState.activeQuestion.answers.filter(a => a.value === arr[0] || a.value === arr[1])
+  }
+
+  resetAttributes() {
+    // REVIEW put in a single place and reference (set a default)
+    AppState.attributes = {
+      role: {
+        tank: 0,
+        damage: 0,
+        support: 0,
+        utility: 0
+      },
+      style: {
+        weapons: 0,
+        spells: 0,
+        balance: 0
+      }
+    }
+    AppState.count = {
+      role: 0,
+      style: 0
+    }
+  }
 }
 
 export const quizService = new QuizService()
