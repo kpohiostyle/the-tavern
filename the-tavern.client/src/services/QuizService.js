@@ -1,8 +1,7 @@
 import { AppState } from '../AppState'
 import router from '../router'
-// import router from '../router'
 import { api } from './AxiosService'
-import { jobsService } from './JobsService'
+import { resultsService } from './ResultsService'
 
 class QuizService {
   async getQuestions() {
@@ -88,36 +87,11 @@ class QuizService {
   async jobQuestion() {
     // FIXME DOM manipulation
     const res = AppState.jobs.find(j => j.role === AppState.character.role && j.style === AppState.character.style)
-    await jobsService.getJob(res)
+    await resultsService.getJob(res.title)
     const job = AppState.job
-    AppState.quiz[11].answers = [
-      {
-        body: job.races[0],
-        value: job.races[0]
-      },
-      {
-        body: job.races[1],
-        value: job.races[1]
-      },
-      {
-        body: job.races[2],
-        value: job.races[2]
-      }
-    ]
-    AppState.quiz[12].answers = [
-      {
-        body: job.backgrounds[0],
-        value: job.backgrounds[0]
-      },
-      {
-        body: job.backgrounds[1],
-        value: job.backgrounds[1]
-      },
-      {
-        body: job.backgrounds[2],
-        value: job.backgrounds[2]
-      }
-    ]
+    AppState.quiz[11].answers = job.races
+    AppState.quiz[12].answers = job.backgrounds
+    AppState.quiz[13] = job.subChoices
     AppState.question = AppState.quiz[11]
     document.getElementById('weapons').classList.add('d-none')
     document.getElementById('spells').classList.add('d-none')
@@ -125,12 +99,12 @@ class QuizService {
     document.getElementById(AppState.character.style.toLowerCase()).classList.remove('d-none')
   }
 
-  jobSpecifics(str, num) {
+  async jobSpecifics(str, num) {
     if (num === 11) {
-      AppState.character.race = str
+      await resultsService.getRace(str)
       AppState.question = AppState.quiz[num + 1]
     } else if (num === 12) {
-      AppState.character.background = str
+      await resultsService.getBackground(str)
       router.push('Results')
     }
   }

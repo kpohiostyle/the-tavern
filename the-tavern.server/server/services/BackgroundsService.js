@@ -2,17 +2,9 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class BackgroundsService {
-  async getAllBackgrounds(query = {}) {
+  async getBackgrounds(query = {}) {
     const backgrounds = await dbContext.Backgrounds.find(query)
     return backgrounds
-  }
-
-  async getBackground(query) {
-    const background = await dbContext.Backgrounds.findOne({ role: query.role, style: query.style })
-    if (!background) {
-      throw new BadRequest('Invalid Query')
-    }
-    return background
   }
 
   async createBackground(body) {

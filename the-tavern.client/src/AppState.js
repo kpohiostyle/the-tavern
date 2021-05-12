@@ -7,19 +7,8 @@ export const AppState = reactive({
   quiz: [],
   question: {},
   resultsArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
-  results: {
-    tank: 0,
-    damage: 0,
-    support: 0,
-    utility: 0,
-    weapons: 0,
-    spells: 0,
-    balance: 0
-  },
-  count: {
-    role: 0,
-    style: 0
-  },
+  results: {},
+  count: {},
   jobs: [
     {
       title: 'Barbarian',
@@ -54,7 +43,7 @@ export const AppState = reactive({
     {
       title: 'Monk',
       role: 'Support',
-      style: 'Damage'
+      style: 'Weapons'
     },
     {
       title: 'Wizard',
@@ -69,7 +58,7 @@ export const AppState = reactive({
     {
       title: 'Rogue',
       role: 'Utility',
-      style: 'Damage'
+      style: 'Weapons'
     },
     {
       title: 'Warlock',
@@ -83,6 +72,9 @@ export const AppState = reactive({
     }
   ],
   job: {},
+  race: {},
+  background: {},
   character: {},
+  characters: [],
   rawData: []
 })

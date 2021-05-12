@@ -6,27 +6,17 @@ export class BackgroundsController extends BaseController {
   constructor() {
     super('api/backgrounds')
     this.router
-      .get('', this.getAllBackgrounds)
-      .get('', this.getBackground)
+      .get('', this.getBackgrounds)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .post('', this.createBackground)
       .put('/:id', this.editBackground)
       .use(Auth0Provider.getAuthorizedUserInfo)
   }
 
-  async getAllBackgrounds(req, res, next) {
+  async getBackgrounds(req, res, next) {
     try {
-      const backgrounds = await backgroundsService.getAllBackgrounds(req.query)
+      const backgrounds = await backgroundsService.getBackgrounds(req.query)
       return res.send(backgrounds)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async getBackground(req, res, next) {
-    try {
-      const data = await backgroundsService.getBackground(req.query)
-      return res.send(data)
     } catch (error) {
       next(error)
     }

@@ -3,12 +3,12 @@ const Schema = mongoose.Schema
 
 const Question = new Schema(
   {
-    number: { type: Number, required: true },
-    query: { type: String, required: true },
+    number: { type: Number },
+    query: { type: String },
     answers: {
       type: Array,
-      body: { type: String, required: true },
-      value: { type: String, required: true }
+      body: { type: String },
+      value: { type: String }
     }
 
   },

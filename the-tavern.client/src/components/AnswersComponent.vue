@@ -1,9 +1,7 @@
 <template>
-  <div class="col-md-6 col-12 p-md-5 p-3">
-    <button type="button" class="btn btn-lg btn-outline-dark shadow py-2 px-5" @click="select(answerProp.value)">
-      <h3 class="p-0 m-0 my-auto">
-        {{ answerProp.body }}
-      </h3>
+  <div class="col-md-6 col-12 p-md-3 p-3">
+    <button type="button" class="btn btn-lg btn-outline-dark shadow py-2 px-3" @click="select(answerProp.value)">
+      {{ answerProp.body }}
     </button>
   </div>
 </template>
@@ -48,8 +46,6 @@ export default {
 button {
   height: 10rem;
   width: 100%;
-}
-h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 </style>
