@@ -1,8 +1,16 @@
 <template>
-  <div class="shadow row justify-content-center bg-light text-center m-3 p-md-5 p-4">
-    <div class="col-12 shadow my-1">
-      <h5><u> Name</u></h5>
-      <p>Race: Race | Class: Job</p>
+  <div class=" row justify-content-center text-center p-md-5">
+    <div class="col-12 shadow mb-2 py-2 accordion">
+      <h5><u> Pikachu</u></h5>
+      <p>Pokemon Rodent</p>
+    </div>
+    <div class="col-12 shadow my-2 py-2">
+      <h5><u> Legolas</u></h5>
+      <p>Elven Archer</p>
+    </div>
+    <div class="col-12 shadow my-2 py-2">
+      <h5><u> Logan</u></h5>
+      <p>Human Dumbass</p>
     </div>
   </div>
 </template>
@@ -31,6 +39,20 @@ export default {
   components: {}
 }
 </script>
-<style lang="">
+<style scoped>
+h5{
+  font-size: 2rem;
+}
+p{
+  font-size: 1.25rem;
+}
+.accordion{
+  display: none;
+}
 
+@media (min-width: 768px){
+  .accordion{
+    display: block;
+  }
+}
 </style>

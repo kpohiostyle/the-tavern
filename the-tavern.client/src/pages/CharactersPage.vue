@@ -3,11 +3,12 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="row">
-          <!-- <CharacterListComponent v-for="character in state.characters" :key="character.id" :character="character" /> -->
+          <CharacterListComponent />
+          <!-- v-for="character in state.characters" :key="character.id" :character="character" -->
         </div>
       </div>
-      <div class="col-md-8">
-        <!-- <ActiveCharacter /> -->
+      <div class="col-md-8 d-md-block d-none">
+        <ActiveCharacter />
       </div>
     </div>
   </div>
@@ -17,10 +18,10 @@
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { charactersService } from '../services/CharactersService'
-// import Notification from '../utils/Notification'
+import Notification from '../utils/Notification'
 
 export default {
-  name: 'Home',
+  name: 'CharactersPage',
   setup() {
     const state = reactive({
       character: computed(() => AppState.character)
@@ -49,5 +50,8 @@ export default {
 
  button {
    font-size: 1.5rem;
+ }
+ @media(min-width: 768px){
+
  }
 </style>
