@@ -20,6 +20,7 @@
           <h3>Play Style: {{ state.character.style }}</h3>
           <h3>Race: {{ state.character.race }}</h3>
           <h3>Class: {{ state.character.job }}</h3>
+          <h3>Sub-Class: {{ state.character.subJob }}</h3>
           <h3>Background: {{ state.character.background }}</h3>
         </div>
       </div>

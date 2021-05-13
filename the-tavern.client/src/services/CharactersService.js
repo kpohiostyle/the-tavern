@@ -16,6 +16,7 @@ class CharactersService {
       role: job.role,
       style: job.style,
       job: job.title,
+      subJob: job.subJobs.title,
       race: race.title,
       background: background.title,
       size: race.size,

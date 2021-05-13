@@ -19,7 +19,7 @@
               </router-link>
             </div>
             <div class="col-md-3 col-8">
-              <router-link :to="{name: 'Quiz'}">
+              <router-link :to="{name: 'Questions'}">
                 <button type="button" class="btn btn-lg btn-primary">
                   Get Started!
                 </button>
@@ -47,7 +47,6 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { quizService } from '../services/QuizService'
 
 export default {
   name: 'Home',
@@ -59,7 +58,6 @@ export default {
       character: computed(() => AppState.character)
     })
     onMounted(async() => {
-      quizService.resetResults()
     })
     return {
       state

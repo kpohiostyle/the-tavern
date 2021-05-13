@@ -1,23 +1,23 @@
 <template>
-  <div class="quiz container-fluid">
-    <div class="row justify-content-center" v-if="state.question && !state.loading">
+  <div class="questions container-fluid">
+    <div class="row justify-content-center" v-if="state.activeQuestion && !state.loading">
       <div class="col-md-8 col-12 p-md-5">
         <QuestionComponent />
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
         <div class="shadow bg-light text-center m-3 p-5">
-          <h2><u>Quiz Progress</u></h2>
+          <h2><u>Progress</u></h2>
           <!-- The value of the 'Style' & aria-valuenow attributes will be tied to the Index of our question Array at current question -->
-          <div id="quiz results" class="progress mb-4" style="height: 2rem">
+          <div id="questions results" class="progress mb-4" style="height: 2rem">
             <div class="progress-bar bg-primary"
                  role="progressbar"
-                 :style="`width: ${state.question.number * 10}%`"
-                 :aria-valuenow="`${state.question.number * 10}`"
+                 :style="`width: ${state.count.question * 10}%`"
+                 :aria-valuenow="`${state.count.question * 10}`"
                  aria-valuemin="0"
                  aria-valuemax="100"
             ></div>
           </div>
-          <div id="role">
+          <!-- <div id="role">
             <div id="tank">
               <h3 class="mb-0 text-left">
                 Tank
@@ -74,9 +74,9 @@
                 ></div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- These will be displayed dynamically through v-ifs -->
-          <div id="style" class="d-none">
+          <!-- <div id="style" class="d-none">
             <div id="weapons">
               <h3 class="mb-0 text-left">
                 Weapons
@@ -119,7 +119,7 @@
                 ></div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -132,20 +132,22 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { quizService } from '../services/QuizService'
+import { questionsService } from '../services/QuestionsService'
 import Notification from '../utils/Notification'
 
 export default {
-  name: 'QuizPage',
+  name: 'QuestionsPage',
   setup() {
     const state = reactive({
       loading: true,
-      question: computed(() => AppState.question),
-      results: computed(() => AppState.results)
+      activeQuestion: computed(() => AppState.activeQuestion),
+      attributes: computed(() => AppState.attributes),
+      count: computed(() => AppState.count)
     })
     onMounted(async() => {
       try {
-        await quizService.getQuestions()
+        questionsService.resetAttributes()
+        await questionsService.getQuestions()
         state.loading = false
       } catch (error) {
         Notification.toast('Error: ' + error, 'error')
