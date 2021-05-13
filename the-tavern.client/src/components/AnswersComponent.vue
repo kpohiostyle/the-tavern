@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6 col-12 p-md-3 p-3">
-    <button type="button" class="btn btn-lg btn-outline-dark shadow py-2 px-3" @click="select(answerProp.value)">
+    <button type="button" class="btn btn-lg btn-outline-dark shadow py-2 px-3" @click="select(answerProp.value, state.activeQuestion.type)">
       {{ answerProp.body }}
     </button>
   </div>
@@ -9,7 +9,7 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { quizService } from '../services/QuizService'
+import { questionsService } from '../services/QuestionsService'
 import Notification from '../utils/Notification'
 
 export default {
@@ -22,16 +22,17 @@ export default {
   },
   setup() {
     const state = reactive({
-      question: computed(() => AppState.question)
+      activeQuestion: computed(() => AppState.activeQuestion)
     })
     onMounted(async() => {
 
     })
     return {
       state,
-      async select(answer) {
+      async select(value, type) {
         try {
-          quizService.nextQuestion(answer, state.question.number)
+          // quizService.nextQuestion(answer, state.question.number)
+          questionsService.buildCharacter(value, type)
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }

@@ -4,22 +4,20 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
-  quiz: [],
-  question: {},
+  // quiz: [],
+  // question: {},
   questions: {
     role: [],
     style: [],
     trade: []
   },
   activeQuestion: {},
-  resultsArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
-  results: {},
-  attributesArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
-  attributes: {
-    role: [],
-    style: []
-  },
+  // resultsArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
+  // results: {},
+  // attributesArr: ['Tank', 'Damage', 'Support', 'Utility', 'Weapons', 'Spells', 'Balance'],
+  attributes: {},
   count: {},
+  tieBreakers: [],
   jobs: [
     {
       title: 'Barbarian',
