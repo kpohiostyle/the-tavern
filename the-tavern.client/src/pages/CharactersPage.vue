@@ -33,11 +33,12 @@ export default {
   setup() {
     const state = reactive({
       characters: computed(() => AppState.characters),
-      activeCharacter: computed(() => AppState.activeCharacter)
+      activeCharacter: computed(() => AppState.activeCharacter),
+      account: computed(() => AppState.account)
     })
     onMounted(async() => {
       try {
-        await charactersService.getCharacters()
+        await charactersService.getCharacters(state.account.id)
         console.log(AppState.characters)
       } catch (error) {
         Notification.toast('Error: ' + error, 'error')

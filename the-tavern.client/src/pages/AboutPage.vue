@@ -44,36 +44,38 @@
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
         <div class="shadow bg-light text-center m-3 p-5">
-          <h2><u>Bartender</u></h2>
+          <div>
+            <img src="../assets/img/bartender.png" alt="Friendly Tavern Keeper">
+          </div>
           <i>You must be new in town. Let me know if you have any questions!</i>
           <div class="row justify-content-center">
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="classes">
                 Classes
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="DnD races">
                 Races
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="backgrounds">
                 Backgrounds
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="equipment">
                 Equipment
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="basic rules">
                 Basic Rules
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
+              <button type="button" class="btn btn-primary w-100" title="terminology and definitions">
                 Terminology
               </button>
             </div>
@@ -102,5 +104,9 @@ export default {
  }
  button {
    font-size: 1.25rem;
+ }
+ img{
+   height: 30rem;
+   width: 25;
  }
 </style>
