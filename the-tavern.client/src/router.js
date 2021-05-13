@@ -24,7 +24,8 @@ const routes = [
   {
     path: '/characters',
     name: 'Characters',
-    component: loadPage('CharactersPage')
+    component: loadPage('CharactersPage'),
+    beforeEnter: authGuard
   },
   {
     path: '/dungeon-test',

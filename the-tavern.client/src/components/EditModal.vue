@@ -12,23 +12,30 @@
             </button>
           </div>
           <div class="modal-body">
-            <form @submit.prevent="editCharacter">
+            <form @submit.prevent="setName">
               <div class="form-group">
               </div>
               <div class="form-group">
-                <label for="comment">Name</label>
+                <label for="comment">Name:</label>
                 <input type="text"
                        class="form-control"
                        id="name"
                        aria-describedby="name"
                        placeholder="Name"
                        rows="6"
-                       coloumns="10"
+                       columns="10"
+                       v-model="state.character.name"
                        required
                 >
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="female">
+                <input class="form-check-input"
+                       type="radio"
+                       name="inlineRadioOptions"
+                       id="inlineRadio1"
+                       value="female"
+                       v-model="state.character.gender"
+                >
                 <label class="form-check-label" for="inlineRadio1">Female</label>
               </div>
               <div class="form-check form-check-inline">
@@ -50,15 +57,15 @@
                     Alignment
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Lawful/Good</a>
-                    <a class="dropdown-item" href="#">Lawful/Neutral</a>
-                    <a class="dropdown-item" href="#">Lawful/Evil</a>
-                    <a class="dropdown-item" href="#">Neutral/Good</a>
-                    <a class="dropdown-item" href="#">Neutral/Neutral</a>
-                    <a class="dropdown-item" href="#">Neutral/Evil</a>
-                    <a class="dropdown-item" href="#">Chaotic/Good</a>
-                    <a class="dropdown-item" href="#">Chaotic/Neutral</a>
-                    <a class="dropdown-item" href="#">Chaotic/Evil</a>
+                    <a class="dropdown-item">Lawful/Good</a>
+                    <a class="dropdown-item">Lawful/Neutral</a>
+                    <a class="dropdown-item">Lawful/Evil</a>
+                    <a class="dropdown-item">Neutral/Good</a>
+                    <a class="dropdown-item">Neutral/Neutral</a>
+                    <a class="dropdown-item">Neutral/Evil</a>
+                    <a class="dropdown-item">Chaotic/Good</a>
+                    <a class="dropdown-item">Chaotic/Neutral</a>
+                    <a class="dropdown-item">Chaotic/Evil</a>
                   </div>
                 </div>
               </div>
@@ -82,25 +89,26 @@
 <script>
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { charactersService } from '../services/CharactersService'
-import Notification from '../utils/Notification'
+// import { charactersService } from '../services/CharactersService'
+// import Notification from '../utils/Notification'
 import $ from 'jquery'
 export default {
   name: 'EditModal',
-  setup() {
+  props: {
+    // character: {
+    //   type: Object,
+    //   required: true
+    // }
+  },
+  setup(props) {
     const state = reactive({
       character: computed(() => AppState.character)
     })
     return {
       state,
-      async editCharacter() {
-        try {
-          await charactersService.editCharacter()
-          $('#edit-character').modal('hide')
-          Notification.toast('Updated', 'success')
-        } catch (error) {
-          Notification.toast('Error: ' + error, 'error')
-        }
+      setName() {
+        AppState.character.name = state.character.name
+        $('#edit-character').modal('hide')
       }
     }
   }
