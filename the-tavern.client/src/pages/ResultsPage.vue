@@ -7,7 +7,7 @@
           <h3>Size: {{ state.character.size }}</h3>
           <h3>Speed: {{ state.character.speed }}'</h3>
           <h3>Health: {{ state.character.speed }} Hit Points</h3>
-          <h3>Tools: {{ state.character.equipment.tools }}</h3>
+          <!-- <h3>Tools: {{ state.character.equipment.tools }}</h3> -->
           <h3>Cantrips: {{ state.character.spellcasting.cantrips }}</h3>
           <h3>Spells: {{ state.character.spellcasting.spells }}</h3>
           <h1>BITE ME!</h1>
@@ -50,9 +50,10 @@ export default {
     })
     return {
       state,
+      user: computed(() => AppState.user),
       async saveCharacter() {
         try {
-          await charactersService.saveCharacter(AppState.character)
+          await charactersService.saveCharacter(state.character)
         } catch (error) {
           Notification.toast('Error' + error, 'error')
         }

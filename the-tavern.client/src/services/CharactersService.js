@@ -25,8 +25,8 @@ class CharactersService {
       health: job.health,
       proBonus: 2,
       scores: race.scores,
-      languages: race.languages,
-      abilities: job.abilities,
+      // languages: race.languages,
+      // abilities: job.abilities,
       spellcasting: {
         spellAbility: job.spellcasting.ability,
         totalSpells: job.spellcasting.spells,
@@ -34,13 +34,13 @@ class CharactersService {
         totalCantrips: job.spellcasting.cantrips,
         cantrips: job.spellcasting.cantripsRec,
         slots: job.spellcasting.slots
-      },
-      proficiencies: job.proficiencies,
-      equipment: {
-        weapons: [],
-        armor: [],
-        tools: job.tools
       }
+      // proficiencies: job.proficiencies,
+      // equipment: {
+      //   weapons: [],
+      //   armor: [],
+      //   tools: job.tools
+      // }
     }
     console.log(AppState.character)
   }

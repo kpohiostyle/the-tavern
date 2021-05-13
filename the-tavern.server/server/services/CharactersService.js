@@ -7,7 +7,7 @@ class CharactersService {
     return characters
   }
 
-  async createCharacter(body) {
+  async saveCharacter(body) {
     return await dbContext.Characters.create(body)
   }
 
