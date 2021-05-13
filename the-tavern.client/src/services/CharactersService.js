@@ -9,11 +9,23 @@ class CharactersService {
     console.log(AppState.characters)
   }
 
+  getSkills() {
+    const skills = AppState.character.proficiencies.skills
+    for (let i = 0; i < skills.length; i++) {
+      AppState.job.proficiencies.skills.from = AppState.job.proficiencies.skills.from.filter(s => s !== skills[i])
+    }
+  }
+
   createCharacter() {
     const job = AppState.job
     const race = AppState.race
     const background = AppState.background
     AppState.character = {
+      name: '',
+      age: null,
+      gender: '',
+      alignment: '',
+      imgUrl: '',
       role: job.role,
       style: job.style,
       job: job.title,
@@ -34,8 +46,13 @@ class CharactersService {
         totalCantrips: job.spellcasting.cantrips,
         cantrips: job.spellcasting.cantripsRec,
         slots: job.spellcasting.slots
+      },
+      proficiencies: {
+        weapons: [],
+        armor: [],
+        tools: [],
+        skills: background.proficiencies.skills
       }
-      // proficiencies: job.proficiencies,
       // equipment: {
       //   weapons: [],
       //   armor: [],

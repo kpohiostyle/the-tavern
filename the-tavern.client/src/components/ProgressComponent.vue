@@ -42,7 +42,7 @@ export default {
   name: 'ProgressComponent',
   props: {
     attributeProp: {
-      type: Object,
+      type: String,
       required: true
     }
   },
