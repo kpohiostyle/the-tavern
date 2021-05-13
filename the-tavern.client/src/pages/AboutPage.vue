@@ -1,84 +1,73 @@
 <template>
   <div class="about container-fluid">
     <div class="row justify-content-center">
-      <div class="col-md-8 col-12 p-md-5">
-        <div class="shadow bg-light text-center m-3 p-md-5 p-4">
-          <h2><u>DnD Game Basics</u></h2>
-          <h3>
-            Basic rules for DnD 5e and a glossary of terms.
-          </h3>
-          <i class="d-md-block d-none">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non laudantium aspernatur quod, possimus culpa temporibus perferendis sed sapiente excepturi? Sapiente, nemo quae? Ex, dolores rem. Explicabo cumque provident magni? Obcaecati, dolor. Cupiditate accusamus soluta provident nobis, deserunt in neque dignissimos error assumenda, consequuntur recusandae, totam laborum. Inventore accusantium sint, reprehenderit et exercitationem dolorem tempore esse praesentium, cumque culpa saepe eaque harum ad. Dolorem perspiciatis, praesentium amet doloribus dolore officia ipsam nemo harum ipsum distinctio voluptas.</i>
-          <div class="row justify-content-around">
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Classes
-              </button>
-            </div>
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Races
-              </button>
-            </div>
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Backgrounds
-              </button>
-            </div>
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Equipment
-              </button>
-            </div>
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Basic Rules
-              </button>
-            </div>
-            <div class="col-6 d-md-none d-block text-center my-2">
-              <button type="button" class="btn btn-primary w-100">
-                Terminology
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='basics'">
+        <StartingComponent />
       </div>
-      <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='classes'">
+        <ClassesAboutComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='races'">
+        <RaceComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='background'">
+        <BackgroundComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='equipment'">
+        <EquipmentComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='rules'">
+        <RulesComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='term'">
+        <TermComponent />
+      </div>
+      <div class="col-md-8 col-12 p-md-5" v-if="state.show=='rec'">
+        <RecComponent />
+      </div>
+      <div class="TavernKeeper col-4 d-md-block d-none bg-primary p-5 pt-5">
         <div class="shadow bg-light text-center m-3 p-5">
           <div>
-            <img src="../assets/img/bartender.png" alt="Friendly Tavern Keeper">
+            <img src="https://imgur.com/a/Cy90ukc" alt="Friendly Tavern Keeper">
           </div>
           <i>You must be new in town. Let me know if you have any questions!</i>
           <div class="row justify-content-center">
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="classes">
+              <button type="button" class="btn btn-primary w-100" title="classes" @click="toggle('classes')">
                 Classes
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="DnD races">
+              <button type="button" class="btn btn-primary w-100" title="DnD races" @click="toggle('races')">
                 Races
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="backgrounds">
+              <button type="button" class="btn btn-primary w-100" title="backgrounds" @click="toggle('background')">
                 Backgrounds
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="equipment">
+              <button type="button" class="btn btn-primary w-100" title="equipment" @click="toggle('equipment')">
                 Equipment
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="basic rules">
+              <button type="button" class="btn btn-primary w-100" title="basic rules" @click="toggle('rules')">
                 Basic Rules
               </button>
             </div>
             <div class="col-6 text-center my-2">
-              <button type="button" class="btn btn-primary w-100" title="terminology and definitions">
+              <button type="button" class="btn btn-primary w-100" title="terminology and definitions" @click="toggle('term')">
                 Terminology
               </button>
             </div>
+            <i>Looking for something more specific? Here are some helpful resources.</i>
+          </div>
+          <div class="col-12 text-center my-2">
+            <button type="button" class="btn btn-primary w-100" title="terminology and definitions" @click="toggle('rec')">
+              Helpful Links
+            </button>
           </div>
         </div>
       </div>
@@ -87,8 +76,31 @@
 </template>
 
 <script>
+import { computed, reactive } from 'vue'
+import { AppState } from '../AppState'
 export default {
-  name: 'AboutPage'
+  name: 'AboutPage',
+  props: {
+    character: {
+      type: Object,
+      required: true
+    }
+  },
+  setup() {
+    const state = reactive({
+      show: 'basics',
+      characters: computed(() => AppState.characters),
+      activeCharacter: computed(() => AppState.activeCharacter)
+    })
+
+    return {
+      state,
+      toggle(str) {
+        state.show = str
+      }
+    }
+  },
+  components: {}
 }
 </script>
 
