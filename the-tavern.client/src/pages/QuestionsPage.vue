@@ -18,101 +18,13 @@
             ></div>
           </div>
           <div>
-            <ProgressComponent v-for="(a, key, index) in state.attributes.style" :key="index" :attribute-prop="key" />
             <ProgressComponent v-for="(a, key, index) in state.attributes.role" :key="index" :attribute-prop="key" />
+            <ProgressComponent v-for="(a, key, index) in state.attributes.style" :key="index" :attribute-prop="key" />
           </div>
-          <!-- <div id="role">
-            <div id="damage">
-              <h3 class="mb-0 text-left">
-                Damage
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-warning"
-                     role="progressbar"
-                     :style="`width: ${state.results.damage * 20}%`"
-                     :aria-valuenow="`${state.results.damage * 20}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-            <div id="support">
-              <h3 class="mb-0 text-left">
-                Support
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-success"
-                     role="progressbar"
-                     :style="`width: ${state.results.support * 20}%`"
-                     :aria-valuenow="`${state.results.support * 20}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-            <div id="utility">
-              <h3 class="mb-0 text-left">
-                Utility
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-info"
-                     role="progressbar"
-                     :style="`width: ${state.results.utility * 20}%`"
-                     :aria-valuenow="`${state.results.utility * 20}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-          </div> -->
-          <!-- These will be displayed dynamically through v-ifs -->
-          <!-- <div id="style" class="d-none">
-            <div id="weapons">
-              <h3 class="mb-0 text-left">
-                Weapons
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-danger"
-                     role="progressbar"
-                     :style="`width: ${state.results.weapons * 25}%`"
-                     :aria-valuenow="`${state.results.weapons * 25}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-            <div id="spells">
-              <h3 class="mb-0 text-left">
-                Spells
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-success"
-                     role="progressbar"
-                     :style="`width: ${state.results.spells * 25}%`"
-                     :aria-valuenow="`${state.results.spells * 25}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-            <div id="balance">
-              <h3 class="mb-0 text-left">
-                Balance
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-info"
-                     role="progressbar"
-                     :style="`width: ${state.results.balance * 25}%`"
-                     :aria-valuenow="`${state.results.balance * 25}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
+
     <div class="row justify-content-center m-5" v-else>
       <h2><i class="fas fa-dice-d20 fa-spin text-warning"></i></h2>
     </div>

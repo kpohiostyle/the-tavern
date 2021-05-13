@@ -7,8 +7,8 @@
       <div class="progress mb-3" style="height: 1.5rem">
         <div :class="'progress-bar ' + state.colors[attributeProp]"
              role="progressbar"
-             :style="`width: ${state.role * 20}%`"
-             :aria-valuenow="`${state.role * 20}`"
+             :style="`width: ${state.role * 33}%`"
+             :aria-valuenow="`${state.role * 33}`"
              aria-valuemin="0"
              aria-valuemax="100"
         ></div>
@@ -20,10 +20,10 @@
         {{ attributeProp }}
       </h3>
       <div class="progress mb-3" style="height: 1.5rem">
-        <div :class="'progress-bar' + state.colors[attributeProp]"
+        <div :class="'progress-bar ' + state.colors[attributeProp]"
              role="progressbar"
-             :style="`width: ${state.style * 20}%`"
-             :aria-valuenow="`${state.style * 20}`"
+             :style="`width: ${state.style * 33}%`"
+             :aria-valuenow="`${state.style * 33}`"
              aria-valuemin="0"
              aria-valuemax="100"
         ></div>

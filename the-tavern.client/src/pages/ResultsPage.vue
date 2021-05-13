@@ -35,6 +35,7 @@
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { charactersService } from '../services/CharactersService'
+import Notification from '../utils/Notification'
 
 export default {
   name: 'Results',
