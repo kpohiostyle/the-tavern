@@ -5,10 +5,14 @@
         <div class="shadow bg-light text-center m-3 p-md-5 p-4">
           <h2><u> You have selected a {{ state.character.race }} {{ state.character.job }}!</u> </h2>
           <div v-if="state.skills < state.job.proficiencies.skills.choose">
-            <h3>Choose {{ state.job.proficiencies.skills.choose }} of your Available Skills!</h3>
+            <h3>Choose {{ state.job.proficiencies.skills.choose }} of your available Skills!</h3>
             <div class="row justify-content-center">
               <SkillsComponent v-for="s in state.job.proficiencies.skills.from" :key="s" :skill-prop="s" />
             </div>
+          </div>
+          <div v-else-if="state.equipment < state.job.equipment[0].choices.length">
+            <h3>Choose from these sets of available Equipment!</h3>
+            <ChoicesComponent v-for="c in state.job.equipment[0].choices" :key="c.first" :choice-prop="c" />
           </div>
         </div>
       </div>
@@ -43,7 +47,8 @@ export default {
       loading: true,
       character: computed(() => AppState.character),
       job: computed(() => AppState.job),
-      skills: computed(() => AppState.count.skills)
+      skills: computed(() => AppState.count.skills),
+      equipment: computed(() => AppState.count.equipment)
     })
     onMounted(async() => {
       charactersService.createCharacter()

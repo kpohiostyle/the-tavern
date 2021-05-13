@@ -20,6 +20,7 @@ class CharactersService {
     const job = AppState.job
     const race = AppState.race
     const background = AppState.background
+
     AppState.character = {
       name: '',
       age: null,
@@ -48,16 +49,16 @@ class CharactersService {
         slots: job.spellcasting.slots
       },
       proficiencies: {
+        weapons: job.proficiencies.weapons !== undefined ? job.proficiencies.weapons : [],
+        armor: job.proficiencies.armor !== undefined ? job.proficiencies.armor : [],
+        tools: job.proficiencies.tools !== undefined ? job.proficiencies.tools : [],
+        skills: background.proficiencies.skills !== undefined ? background.proficiencies.skills : []
+      },
+      equipment: {
         weapons: [],
         armor: [],
-        tools: [],
-        skills: background.proficiencies.skills
+        tools: job.tools
       }
-      // equipment: {
-      //   weapons: [],
-      //   armor: [],
-      //   tools: job.tools
-      // }
     }
     console.log(AppState.character)
   }
