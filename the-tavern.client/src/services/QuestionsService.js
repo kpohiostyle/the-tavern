@@ -138,7 +138,6 @@ class QuestionsService {
     const questions = AppState.questions
     if (AppState.tieBreakers.length === 2) {
       this.tieBreaker(type, AppState.tieBreakers)
-      AppState.tieBreakers = []
     } else if (AppState.activeQuestion.number === questions[t].length - 1) {
       if (type === 'Role') {
         AppState.activeQuestion = questions.style[0]
@@ -198,6 +197,7 @@ class QuestionsService {
     AppState.count.question++
     AppState.activeQuestion = questions[questions.length - 1]
     AppState.activeQuestion.answers = AppState.activeQuestion.answers.filter(a => a.value === arr[0] || a.value === arr[1])
+    AppState.tieBreakers = []
   }
 
   resetAttributes() {
@@ -220,6 +220,7 @@ class QuestionsService {
       style: 0,
       question: 0
     }
+    AppState.tieBreakers = []
   }
 }
 
