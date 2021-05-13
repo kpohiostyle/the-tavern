@@ -15,7 +15,7 @@ const Character = new Schema(
     gender: { type: String },
     alignment: { type: String },
     size: { type: String },
-    speed: { type: String },
+    speed: { type: Number },
     imgUrl: { type: String },
     health: { type: Number },
     armorRating: { type: Number },
