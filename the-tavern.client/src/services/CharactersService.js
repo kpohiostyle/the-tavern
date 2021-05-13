@@ -1,12 +1,13 @@
 import { AppState } from '../AppState'
-// import { api } from './AxiosService'
+import router from '../router'
+import { api } from './AxiosService'
 
 class CharactersService {
-  // async getCharacter(character) {
-  //   const res = await api.get(`api/characters?title=${character.title}`)
-  //   AppState.character = res.data[0]
-  //   console.log(AppState.character)
-  // }
+  async getCharacters() {
+    const res = await api.get('api/characters')
+    AppState.characters = res.data
+    console.log(AppState.characters)
+  }
 
   createCharacter() {
     const job = AppState.job
@@ -42,6 +43,15 @@ class CharactersService {
       }
     }
     console.log(AppState.character)
+  }
+
+  async saveCharacter(body) {
+    await api.post('api/characters', body)
+    router.push('Characters')
+  }
+
+  setActiveCharacter(id) {
+    AppState.activeCharacter = AppState.characters.find(c => c.id === id)
   }
 }
 

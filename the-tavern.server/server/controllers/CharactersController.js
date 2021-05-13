@@ -1,5 +1,5 @@
 import BaseController from '../utils/BaseController'
-import { Auth0Provider } from '@bcwdev/auth0provider'
+// import { Auth0Provider } from '@bcwdev/auth0provider'
 import { charactersService } from '../services/CharactersService'
 
 export class CharactersController extends BaseController {
@@ -7,7 +7,7 @@ export class CharactersController extends BaseController {
     super('api/characters')
     this.router
     // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .use(Auth0Provider.getAuthorizedUserInfo)
+      // .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getCharacters)
       .post('', this.createCharacter)
       .put('/:id', this.editCharacter)
@@ -22,6 +22,15 @@ export class CharactersController extends BaseController {
       next(error)
     }
   }
+  // async getCharacters(req, res, next) {
+  //   try {
+  //     req.creatorId = req.userInfo.id
+  //     const data = await charactersService.getCharacters(req.creatorId)
+  //     return res.send(data)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async createCharacter(req, res, next) {
     try {

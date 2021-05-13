@@ -84,6 +84,7 @@ export const AppState = reactive({
   race: {},
   background: {},
   character: {},
+  activeCharacter: {},
   characters: [],
   rawData: []
 })

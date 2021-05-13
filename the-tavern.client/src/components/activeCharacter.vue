@@ -1,12 +1,12 @@
 <template>
   <div class="row my-5">
-    <div class="col-md-4">
+    <div class="col-md-4  text-center">
       <img src="//placehold.it/250x250" alt="">
     </div>
     <div class="col-md-6 shadow">
       <h5><u>Name:</u></h5>
-      <p>Job</p>
-      <p>Race</p>
+      <p>Job: {{ state.character.job }}</p>
+      <p>Race: {{ state.character.race }}</p>
       <p>Age</p>
       <p>Gender</p>
     </div>
@@ -31,8 +31,27 @@
   </div>
 </template>
 <script>
+import { computed, reactive } from 'vue'
+// import { charactersService } from '../services/CharactersService'
+// import { useRoute } from 'vue-router'
+import { AppState } from '../AppState'
 export default {
-
+  name: 'ActiveCharacter',
+  setup() {
+    const state = reactive({
+      character: computed(() => AppState.activeCharacter)
+    })
+    // onMounted(async() => {
+    //   try {
+    //     await charactersService.setActiveCharacter(route.params.id)
+    //   } catch (error) {
+    //     Notification.toast('Error:' + error, 'error')
+    //   }
+    // })
+    return {
+      state
+    }
+  }
 }
 </script>
 <style scoped>
