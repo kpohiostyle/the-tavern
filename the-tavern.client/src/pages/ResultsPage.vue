@@ -4,13 +4,12 @@
       <div class="col-md-8 col-12 p-md-5">
         <div class="shadow bg-light text-center m-3 p-md-5 p-4">
           <h2><u> You have selected a {{ state.character.race }} {{ state.character.job }}!</u> </h2>
-          <h3>Size: {{ state.character.size }}</h3>
-          <h3>Speed: {{ state.character.speed }}'</h3>
-          <h3>Health: {{ state.character.speed }} Hit Points</h3>
-          <!-- <h3>Tools: {{ state.character.equipment.tools }}</h3> -->
-          <h3>Cantrips: {{ state.character.spellcasting.cantrips }}</h3>
-          <h3>Spells: {{ state.character.spellcasting.spells }}</h3>
-          <h1>BITE ME!</h1>
+          <div v-if="state.skills < state.job.proficiencies.skills.choose">
+            <h3>Choose {{ state.job.proficiencies.skills.choose }} of your Available Skills!</h3>
+            <div class="row justify-content-center">
+              <SkillsComponent v-for="s in state.job.proficiencies.skills.from" :key="s" :skill-prop="s" />
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
@@ -42,10 +41,14 @@ export default {
   setup() {
     const state = reactive({
       loading: true,
-      character: computed(() => AppState.character)
+      character: computed(() => AppState.character),
+      job: computed(() => AppState.job),
+      skills: computed(() => AppState.count.skills)
     })
     onMounted(async() => {
       charactersService.createCharacter()
+      charactersService.getSkills()
+      console.log(state.job.proficiencies.skills.from)
       state.loading = false
     })
     return {

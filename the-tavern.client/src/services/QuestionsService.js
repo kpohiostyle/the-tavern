@@ -218,7 +218,8 @@ class QuestionsService {
     AppState.count = {
       role: 0,
       style: 0,
-      question: 0
+      question: 0,
+      skills: 0
     }
     AppState.tieBreakers = []
   }
