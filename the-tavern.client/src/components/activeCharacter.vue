@@ -4,11 +4,11 @@
       <img src="//placehold.it/250x250" alt="">
     </div>
     <div class="col-md-6 shadow">
-      <h5><u>Name:</u></h5>
+      <h5><u>Name: {{ state.character.name }}</u></h5>
       <p>Job: {{ state.character.job }}</p>
       <p>Race: {{ state.character.race }}</p>
-      <p>Age</p>
-      <p>Gender</p>
+      <p>Speed: {{ state.character.speed }}</p>
+      <p>Hit Points: {{ state.character.health }}</p>
     </div>
   </div>
   <div class="row pr-5 mr-5">

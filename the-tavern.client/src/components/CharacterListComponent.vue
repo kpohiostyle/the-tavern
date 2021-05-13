@@ -1,6 +1,6 @@
 <template>
   <!-- TODO get the toggle to dissappear on anything larger than a medium -->
-  <div class="row justify-content-center p-md-5">
+  <div class="row justify-content-center px-md-3">
     <div class="col-12 shadow mb-2 py-2" @click="setActiveCharacter(character.id) ">
       <h5>
         <u>{{ character.job }}</u>
@@ -47,8 +47,11 @@ export default {
       setActiveCharacter(id) {
         try {
           charactersService.setActiveCharacter(id)
-          console.log(state.activeCharacter)
-          state.show = true
+          if (!state.show) {
+            state.show = true
+          } else {
+            state.show = false
+          }
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }

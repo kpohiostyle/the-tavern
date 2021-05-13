@@ -2,10 +2,9 @@
   <div class="home container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-4">
-        <div class="row">
-          <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
-        </div>
+        <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
       </div>
+
       <div class="col-md-8 d-md-block d-none">
         <div v-if="state.activeCharacter">
           <ActiveCharacter />
@@ -15,14 +14,18 @@
         </div>
       </div>
     </div>
+    <div class="col-2">
+      <button title="Open Edit Character Form" type="button" class="btn" data-toggle="modal" data-target="#edit-character">
+        <i class="fas fa-plus" aria-hidden="true">Edit Character</i>
+      </button>
+    </div>
+    <EditModal />
   </div>
 </template>
 
 <script>
-import { computed, onMounted, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { charactersService } from '../services/CharactersService'
-import Notification from '../utils/Notification'
 
 export default {
   name: 'Characters',
@@ -31,14 +34,6 @@ export default {
       characters: computed(() => AppState.characters),
       activeCharacter: computed(() => AppState.activeCharacter),
       account: computed(() => AppState.account)
-    })
-    onMounted(async() => {
-      try {
-        await charactersService.getCharacters(state.account.id)
-        console.log(AppState.characters)
-      } catch (error) {
-        Notification.toast('Error: ' + error, 'error')
-      }
     })
     return {
       state
