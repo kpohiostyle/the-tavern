@@ -3,8 +3,8 @@ import router from '../router'
 import { api } from './AxiosService'
 
 class CharactersService {
-  async getCharacters() {
-    const res = await api.get('api/characters')
+  async getCharacters(id) {
+    const res = await api.get(`api/characters?creatorId=${id}`)
     AppState.characters = res.data
     console.log(AppState.characters)
   }
