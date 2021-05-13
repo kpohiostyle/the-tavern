@@ -3,12 +3,16 @@
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="row">
-          <CharacterListComponent />
-          <!-- v-for="character in state.characters" :key="character.id" :character="character" -->
+          <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
         </div>
       </div>
       <div class="col-md-8 d-md-block d-none">
-        <ActiveCharacter />
+        <div v-if="state.activeCharacter">
+          <ActiveCharacter />
+        </div>
+        <div v-else>
+          <h1>Please select character to view details</h1>
+        </div>
       </div>
     </div>
   </div>
@@ -21,14 +25,16 @@ import { charactersService } from '../services/CharactersService'
 import Notification from '../utils/Notification'
 
 export default {
-  name: 'CharactersPage',
+  name: 'Characters',
   setup() {
     const state = reactive({
-      character: computed(() => AppState.character)
+      characters: computed(() => AppState.characters),
+      activeCharacter: computed(() => AppState.activeCharacter)
     })
     onMounted(async() => {
       try {
         await charactersService.getCharacters()
+        console.log(AppState.characters)
       } catch (error) {
         Notification.toast('Error: ' + error, 'error')
       }

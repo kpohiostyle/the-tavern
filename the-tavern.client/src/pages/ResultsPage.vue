@@ -25,6 +25,9 @@
         </div>
       </div>
     </div>
+    <button type="button" class="btn btn-primary" @click="saveCharacter">
+      Save
+    </button>
   </div>
 </template>
 
@@ -45,7 +48,14 @@ export default {
       state.loading = false
     })
     return {
-      state
+      state,
+      async saveCharacter() {
+        try {
+          await charactersService.saveCharacter(AppState.character)
+        } catch (error) {
+          Notification.toast('Error' + error, 'error')
+        }
+      }
     }
   }
 }

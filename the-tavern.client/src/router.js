@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: '/characters',
-    name: 'CharactersPage',
+    name: 'Characters',
     component: loadPage('CharactersPage')
   },
   {
