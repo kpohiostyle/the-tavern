@@ -17,21 +17,11 @@
                  aria-valuemax="100"
             ></div>
           </div>
+          <div>
+            <ProgressComponent v-for="(a, key, index) in state.attributes.style" :key="index" :attribute-prop="key" />
+            <ProgressComponent v-for="(a, key, index) in state.attributes.role" :key="index" :attribute-prop="key" />
+          </div>
           <!-- <div id="role">
-            <div id="tank">
-              <h3 class="mb-0 text-left">
-                Tank
-              </h3>
-              <div class="progress mb-3" style="height: 1.5rem">
-                <div class="progress-bar bg-danger"
-                     role="progressbar"
-                     :style="`width: ${state.results.tank * 20}%`"
-                     :aria-valuenow="`${state.results.tank * 20}`"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                ></div>
-              </div>
-            </div>
             <div id="damage">
               <h3 class="mb-0 text-left">
                 Damage
