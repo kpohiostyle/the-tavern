@@ -219,7 +219,8 @@ class QuestionsService {
       role: 0,
       style: 0,
       question: 0,
-      skills: 0
+      skills: 0,
+      equipment: 0
     }
     AppState.tieBreakers = []
   }
