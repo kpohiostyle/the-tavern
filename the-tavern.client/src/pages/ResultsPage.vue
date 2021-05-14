@@ -12,7 +12,9 @@
           </div>
           <div v-else-if="state.equipment < state.job.equipment[0].choices.length">
             <h3>Choose from these sets of available Equipment!</h3>
-            <ChoicesComponent v-for="c in state.job.equipment[0].choices" :key="c.first" :choice-prop="c" />
+            <div v-if="state.step === 1">
+              <ChoicesComponent v-for="(c, key) in state.job.equipment[0].choices" :key="key" :choice-prop="c" />
+            </div>
           </div>
         </div>
       </div>
@@ -48,12 +50,12 @@ export default {
       character: computed(() => AppState.character),
       job: computed(() => AppState.job),
       skills: computed(() => AppState.count.skills),
-      equipment: computed(() => AppState.count.equipment)
+      equipment: computed(() => AppState.count.equipment),
+      step: computed(() => AppState.count.step)
     })
     onMounted(async() => {
       charactersService.createCharacter()
       charactersService.getSkills()
-      console.log(state.job.proficiencies.skills.from)
       state.loading = false
     })
     return {

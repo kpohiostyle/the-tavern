@@ -6,7 +6,6 @@ class CharactersService {
   async getCharacters(id) {
     const res = await api.get(`api/characters?creatorId=${id}`)
     AppState.characters = res.data
-    console.log(AppState.characters)
   }
 
   getSkills() {

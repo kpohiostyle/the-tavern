@@ -32,7 +32,7 @@ export default {
       async select(value, type) {
         try {
           // quizService.nextQuestion(answer, state.question.number)
-          questionsService.buildCharacter(value, type)
+          await questionsService.buildCharacter(value, type)
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }
