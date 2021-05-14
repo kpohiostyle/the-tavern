@@ -1,7 +1,7 @@
 <template>
   <!-- TODO get the toggle to dissappear on anything larger than a medium -->
   <div class="row justify-content-center px-md-3">
-    <div class="col-12 shadow mb-2 py-2" @click="setActiveCharacter(character.id) ">
+    <div class="col-12 shadow mb-2 py-2 bg-light" @click="setActiveCharacter(character.id) ">
       <h5>
         <u>{{ character.job }}</u>
       </h5>
@@ -12,15 +12,6 @@
         </div>
       </transition>
     </div>
-
-    <!-- <div class="col-12 shadow my-2 py-2">
-      <h5><u> Legolas</u></h5>
-      <p>Elven Archer</p>
-    </div>
-    <div class="col-12 shadow my-2 py-2">
-      <h5><u> Logan</u></h5>
-      <p>Human Himbo</p> -->
-  <!-- </div> -->
   </div>
 </template>
 <script>
@@ -39,7 +30,8 @@ export default {
     const state = reactive({
       show: false,
       characters: computed(() => AppState.characters),
-      activeCharacter: computed(() => AppState.activeCharacter)
+      activeCharacter: computed(() => AppState.activeCharacter),
+      AppState: computed(() => AppState)
     })
 
     return {
@@ -52,6 +44,7 @@ export default {
           } else {
             state.show = false
           }
+          state.AppState.showActive = true
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }

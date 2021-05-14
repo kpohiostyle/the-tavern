@@ -96,6 +96,10 @@ class CharactersService {
   setActiveCharacter(id) {
     AppState.activeCharacter = AppState.characters.find(c => c.id === id)
   }
+
+  async editName(body) {
+    await api.put(`api/characters/${body.id}`, body)
+  }
 }
 
 export const charactersService = new CharactersService()

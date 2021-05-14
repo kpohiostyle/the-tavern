@@ -10,7 +10,7 @@ const Character = new Schema(
     subJob: { type: String },
     race: { type: String },
     background: { type: String },
-    name: { type: String },
+    name: { type: String, default: '' },
     age: { type: Number },
     gender: { type: String },
     alignment: { type: String },
