@@ -1,6 +1,13 @@
 <template>
-  <div class="row justify-content-around">
-    <div class="col-3 my-3" v-if="choiceProp.first">
+  <div class="bg-dark shadow my-2">
+    <h3 class="text-center text-light pt-3">
+      <u> Set {{ state.step }} </u>
+    </h3>
+    <div class="row justify-content-around my-2">
+      <EquipSelectComponent v-for="(e, index, key) in choiceProp" :key="key" :equipment-prop="e" />
+    </div>
+  </div>
+  <!-- <div class="col-3 my-3" v-if="choiceProp.first">
       <button type="button" class="btn btn-lg btn-outline-dark" v-if="choiceProp.first.weapon">
         <u>Weapon</u> <br> {{ choiceProp.first.weapon[0] }}
       </button>
@@ -32,8 +39,7 @@
       <button type="button" class="btn btn-lg btn-outline-dark" v-if="choiceProp.third.tool">
         Tool: {{ choiceProp.third.tool[0] }}
       </button>
-    </div>
-  </div>
+    </div> -->
 </template>
 
 <script>
@@ -51,19 +57,14 @@ export default {
   setup() {
     const state = reactive({
       character: computed(() => AppState.character),
-      job: computed(() => AppState.job)
+      job: computed(() => AppState.job),
+      step: computed(() => AppState.count.step)
     })
     onMounted(async() => {
 
     })
     return {
-      state,
-      addSkill(str) {
-        AppState.character.proficiencies.skills.push(str)
-        AppState.count.skills++
-        document.getElementById(str).disabled = true
-        console.log(state.character)
-      }
+      state
     }
   },
   components: {}
@@ -74,4 +75,5 @@ export default {
 h2 {
   font-size: 2.5rem;
 }
+
 </style>

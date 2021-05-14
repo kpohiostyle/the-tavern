@@ -35,9 +35,10 @@
           </div>
         </div>
       </div>
-      <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
+      <div class="col-4 d-md-block d-none bg-primary sidebar p-5 pt-5">
         <div class="shadow bg-light text-center m-3 p-5">
-          <h2><u>Character Profile</u></h2>
+          <h2><u>Your Characters</u></h2>
+          <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
         </div>
       </div>
     </div>
@@ -46,12 +47,14 @@
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
+// import { charactersService } from '../services/CharactersService'
 import { AppState } from '../AppState'
 
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
+      user: computed(() => AppState.user),
       loading: true,
       results: computed(() => AppState.results),
       quiz: computed(() => AppState.quiz),
