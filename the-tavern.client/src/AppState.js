@@ -83,8 +83,10 @@ export const AppState = reactive({
   job: {},
   race: {},
   background: {},
+  proficiencies: {},
   character: {},
   activeCharacter: {},
   characters: [],
-  rawData: []
+  rawData: [],
+  showActive: false
 })

@@ -15,10 +15,36 @@ class CharactersService {
     }
   }
 
+  getProficiencies(job, race, background) {
+    AppState.proficiencies += {
+      weapons: job.proficiencies.weapons !== undefined ? job.proficiencies.weapons : [],
+      armor: job.proficiencies.armor !== undefined ? job.proficiencies.armor : [],
+      tools: job.proficiencies.tools !== undefined ? job.proficiencies.tools : []
+    }
+
+    AppState.proficiencies += {
+      weapons: race.proficiencies.weapons !== undefined ? race.proficiencies.weapons : [],
+      armor: race.proficiencies.armor !== undefined ? race.proficiencies.armor : [],
+      tools: race.proficiencies.tools !== undefined ? race.proficiencies.tools : [],
+      skills: race.proficiencies.skills !== undefined ? race.proficiencies.skills : []
+    }
+
+    AppState.proficiencies += {
+      weapons: background.proficiencies.weapons !== undefined ? background.proficiencies.weapons : [],
+      armor: background.proficiencies.armor !== undefined ? background.proficiencies.armor : [],
+      tools: background.proficiencies.tools !== undefined ? background.proficiencies.tools : [],
+      skills: background.proficiencies.skills !== undefined ? background.proficiencies.skills : []
+    }
+    console.log(AppState.proficiencies)
+  }
+
   createCharacter() {
     const job = AppState.job
     const race = AppState.race
     const background = AppState.background
+    const proficiencies = AppState.proficiencies
+
+    // this.getProficiencies(job, race, background)
 
     AppState.character = {
       name: '',
@@ -48,10 +74,10 @@ class CharactersService {
         slots: job.spellcasting.slots
       },
       proficiencies: {
-        weapons: job.proficiencies.weapons !== undefined ? job.proficiencies.weapons : [],
-        armor: job.proficiencies.armor !== undefined ? job.proficiencies.armor : [],
-        tools: job.proficiencies.tools !== undefined ? job.proficiencies.tools : [],
-        skills: background.proficiencies.skills !== undefined ? background.proficiencies.skills : []
+        weapons: proficiencies.weapons !== undefined ? proficiencies.weapons : [],
+        armor: proficiencies.armor !== undefined ? proficiencies.armor : [],
+        tools: proficiencies.tools !== undefined ? proficiencies.tools : [],
+        skills: proficiencies.skills !== undefined ? proficiencies.skills : []
       },
       equipment: {
         weapons: [],

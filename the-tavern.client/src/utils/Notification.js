@@ -51,4 +51,34 @@ export default class Notification {
       showConfirmButton: false
     })
   }
+
+  // static async equipment(type) {
+  //   const inputOptions = new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       resolve({
+  //         if(type === "Simple") {
+  //         '#ff0000': 'Red',
+  //         '#00ff00': 'Green',
+  //         '#0000ff': 'Blue'
+  //         }
+
+  //       })
+  //     }, 1000)
+  //   })
+
+  //   const { value: color } = await Swal.fire({
+  //     title: `Select your ${type} Weapon`,
+  //     input: 'radio',
+  //     inputOptions: inputOptions,
+  //     inputValidator: (value) => {
+  //       if (!value) {
+  //         return 'You need to choose something!'
+  //       }
+  //     }
+  //   })
+
+  //   if (color) {
+  //     Swal.fire({ html: `You selected: ${color}` })
+  //   }
+  // }
 }

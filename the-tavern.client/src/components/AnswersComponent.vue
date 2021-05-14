@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6 col-12 p-md-3 p-3">
-    <button type="button" class="btn btn-lg btn-outline-dark shadow py-2 px-3" @click="select(answerProp.value, state.activeQuestion.type)">
+    <button type="button" class="btn btn-lg btn-dark shadow py-2 px-3" @click="select(answerProp.value, state.activeQuestion.type)">
       {{ answerProp.body }}
     </button>
   </div>
