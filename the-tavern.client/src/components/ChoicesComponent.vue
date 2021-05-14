@@ -1,12 +1,13 @@
 <template>
-  <div class="bg-dark shadow my-2">
+  <div class="bg-dark shadow mt-4 py-1" v-if="state.equipment === indexProp">
     <h3 class="text-center text-light pt-3">
-      <u> Set {{ state.step }} </u>
+      <u> Set {{ indexProp + 1 }}</u>
     </h3>
-    <div class="row justify-content-around my-2">
+    <div class="row justify-content-around my-2 px-1">
       <EquipSelectComponent v-for="(e, index, key) in choiceProp" :key="key" :equipment-prop="e" />
     </div>
   </div>
+
   <!-- <div class="col-3 my-3" v-if="choiceProp.first">
       <button type="button" class="btn btn-lg btn-outline-dark" v-if="choiceProp.first.weapon">
         <u>Weapon</u> <br> {{ choiceProp.first.weapon[0] }}
@@ -52,13 +53,17 @@ export default {
     choiceProp: {
       type: Object,
       required: true
+    },
+    indexProp: {
+      type: Number,
+      required: true
     }
   },
   setup() {
     const state = reactive({
       character: computed(() => AppState.character),
       job: computed(() => AppState.job),
-      step: computed(() => AppState.count.step)
+      equipment: computed(() => AppState.count.equipment)
     })
     onMounted(async() => {
 

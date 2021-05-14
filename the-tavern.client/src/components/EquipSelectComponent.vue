@@ -1,14 +1,14 @@
 <template>
-  <div class="col-4 my-3">
-    <button type="button" class="btn btn-lg btn-light">
+  <div class="col-4 my-2">
+    <button type="button" class="btn btn-lg btn-light" @click="addEquipment(equipmentProp)">
       <h4 class="mb-2" v-if="equipmentProp.weapon">
-        <u>Weapon</u> <br> {{ equipmentProp.weapon[0] }}
+        <u>Weapon</u> <br>  {{ equipmentProp.weapon[0] }} x {{ equipmentProp.weapon.length }}
       </h4>
       <h4 class="mb-2" v-if="equipmentProp.armor">
-        <u>Armor</u> <br>{{ equipmentProp.armor[0] }}
+        <u>Armor</u> <br> {{ equipmentProp.armor[0] }} x {{ equipmentProp.armor.length }}
       </h4>
-      <h4 v-if="equipmentProp.tool">
-        <u>Tool</u> <br>{{ equipmentProp.tool[0] }}
+      <h4 class="mb-2" v-if="equipmentProp.tool">
+        <u>Tool</u> <br> {{ equipmentProp.tool[0] }} x {{ equipmentProp.tool.length }}
       </h4>
     </button>
   </div>
@@ -34,7 +34,20 @@ export default {
     onMounted(async() => {
     })
     return {
-      state
+      state,
+      addEquipment(obj) {
+        if (obj.weapon) {
+          obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
+        }
+        if (obj.armor) {
+          obj.armor.forEach(a => AppState.character.equipment.armor.push(a))
+        }
+        if (obj.tool) {
+          obj.tool.forEach(t => AppState.character.equipment.tools.push(t))
+        }
+        AppState.count.equipment++
+        console.log(state.character)
+      }
     }
   },
   components: {}
