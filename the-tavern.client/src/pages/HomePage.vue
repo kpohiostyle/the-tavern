@@ -10,7 +10,7 @@
           <p class="d-md-block d-none">
             Follow the promps to easily create your ideal character and jumpstart your adventure!
           </p>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center ">
             <div class="col-3 d-md-block d-none text-right">
               <router-link :to="{name: 'About'}">
                 <button type="button" class="btn btn-primary">
