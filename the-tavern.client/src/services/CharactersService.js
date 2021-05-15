@@ -92,7 +92,38 @@ class CharactersService {
       speed: race.speed,
       health: job.health,
       proBonus: 2,
-      scores: race.scores,
+      scores: [
+        {
+          title: 'Strength',
+          value: 0,
+          mod: 0
+        },
+        {
+          title: 'Dexterity',
+          value: 0,
+          mod: 0
+        },
+        {
+          title: 'Constitution',
+          value: 0,
+          mod: 0
+        },
+        {
+          title: 'Intelligence',
+          value: 0,
+          mod: 0
+        },
+        {
+          title: 'Wisdom',
+          value: 0,
+          mod: 0
+        },
+        {
+          title: 'Charisma',
+          value: 0,
+          mod: 0
+        }
+      ],
       languages: race.languages,
       // abilities: job.abilities,
       spellcasting: {
@@ -120,7 +151,7 @@ class CharactersService {
 
   async saveCharacter(body) {
     await api.post('api/characters', body)
-    router.push('Characters')
+    router.push('Account')
   }
 
   setActiveCharacter(id) {

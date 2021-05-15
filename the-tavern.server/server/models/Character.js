@@ -22,10 +22,36 @@ const Character = new Schema(
     proBonus: { type: Number },
     scores: {
       type: Array,
-      title: { type: String },
-      value: { type: Number },
-      choose: { type: Number },
-      from: { type: Array }
+      strength: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      },
+      dexterity: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      },
+      constitution: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      },
+      intelligence: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      },
+      wisdom: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      },
+      charisma: {
+        title: { type: String },
+        value: { type: Number },
+        mod: { type: Number }
+      }
     },
     languages: { type: Array },
     abilities: {
