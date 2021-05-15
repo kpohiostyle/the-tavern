@@ -1,76 +1,57 @@
 <template>
-  <div class="row d-flex flex-direction text-center justify-content-center pr-5 mr-5">
-    <div class="statBox col-2">
+  <div class="col-2 " dropzone="zone" @dragover.prevent @drop.prevent="moveNum(state.activeNum, statProp.title, state.activeScore)">
+    <div class="statBox bg-light">
       <div class="row">
         <div class="col-12 topText">
-          <p>str</p>
+          <h4>{{ statProp.title }}</h4>
         </div>
         <div class="bottomText col-12">
-          <p>25</p>
-        </div>
-      </div>
-    </div>
-    <div class="statBox col-2">
-      <div class="row">
-        <div class="col-12 topText">
-          <p>wis</p>
-        </div>
-        <div class="bottomText col-12">
-          <p>15</p>
-        </div>
-      </div>
-    </div>
-    <div class="statBox col-2">
-      <div class="row">
-        <div class="col-12 topText">
-          <p>dex</p>
-        </div>
-        <div class="bottomText col-12">
-          <p>17</p>
-        </div>
-      </div>
-    </div>
-    <div class="statBox col-2">
-      <div class="row">
-        <div class="col-12 topText">
-          <p>con</p>
-        </div>
-        <div class="bottomText col-12">
-          <p>20</p>
-        </div>
-      </div>
-    </div>
-    <div class="statBox col-2">
-      <div class="row">
-        <div class="col-12 topText">
-          <p>cha</p>
-        </div>
-        <div class="bottomText col-12">
-          <p>5</p>
-        </div>
-      </div>
-    </div>
-    <div class="statBox col-2">
-      <div class="row">
-        <div class="col-12 topText">
-          <p>int</p>
-        </div>
-        <div class="bottomText col-12">
-          <p>30</p>
+          <h3 v-if="statProp.value > 0">
+            {{ statProp.value }}
+          </h3>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { AppState } from '../AppState'
+import { computed, reactive, onMounted } from 'vue'
 export default {
-  name: 'StatsComponent'
+  name: 'StatsComponent',
+  props: {
+    statProp: {
+      type: Number,
+      required: true
+    }
+  },
+  setup(props) {
+    const state = reactive({
+      abilityScore: computed(() => AppState.abilityScore),
+      activeNum: computed(() => AppState.activeNum),
+      activeScore: computed(() => AppState.activeScore)
+    })
+    onMounted(async() => {
+
+    })
+    return {
+      state,
+
+      moveNum(num, title, index) {
+        AppState.characterScores[title.toLowerCase()].value = num
+        AppState.activeScores[index] = 0
+      }
+
+    }
+  }
 }
+
 </script>
 
 <style scoped>
 .statBox{
  border: 1px solid black;
+ height: 7rem;
  font-size: 1rem;
 }
 .topText p{
@@ -80,5 +61,9 @@ export default {
 }
 .bottomText p{
   font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 4rem
 }
 </style>

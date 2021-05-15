@@ -17,17 +17,22 @@
             </div>
           </div>
           <div v-else-if="state.equipment < state.job.equipment[0].choices.length">
-            <h3>Choose from these sets of available Equipment!</h3>
+            <h3>Choose from these sets of available Equipment</h3>
             <div>
               <ChoicesComponent v-for="(c, key) in state.job.equipment[0].choices" :key="key" :choice-prop="c" :index-prop="key" />
             </div>
           </div>
-          <!-- <div v-else>
-            <h3>Now you just need to add some personal information!</h3>
-            <div v-if="state.activeCharacter">
-
+          <div v-else>
+            <h3>Now you just need to roll your Ability Scores</h3>
+            <AbilityScore />
+            <div class="row mt-5 justify-content-center text-center">
+              <div class="col-4">
+                <button type="button" class="btn btn-lg btn-primary" @click="saveCharacter">
+                  Save your Character!
+                </button>
+              </div>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
@@ -42,9 +47,6 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" @click="saveCharacter">
-      Save
-    </button>
   </div>
 </template>
 
@@ -66,6 +68,7 @@ export default {
       skills: computed(() => AppState.count.skills),
       equipment: computed(() => AppState.count.equipment),
       languages: computed(() => AppState.count.languages),
+      score: computed(() => AppState.count.score),
       from: computed(() => AppState.languages)
     })
     onMounted(async() => {
@@ -81,6 +84,8 @@ export default {
       user: computed(() => AppState.user),
       async saveCharacter() {
         try {
+          AppState.character.scores = AppState.activeScores
+          AppState.activeCharacter = AppState.character
           await charactersService.saveCharacter(state.character)
         } catch (error) {
           Notification.toast('Error' + error, 'error')

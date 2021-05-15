@@ -88,5 +88,48 @@ export const AppState = reactive({
   activeCharacter: {},
   characters: [],
   rawData: [],
-  showActive: false
+  showActive: false,
+  abilityScore: [],
+  activeScores: {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+  },
+  activeScore: 0,
+  characterScores: {
+    strength: {
+      title: 'Strength',
+      value: 0,
+      mod: 0
+    },
+    dexterity: {
+      title: 'Dexterity',
+      value: 0,
+      mod: 0
+    },
+    constitution: {
+      title: 'Constitution',
+      value: 0,
+      mod: 0
+    },
+    intelligence: {
+      title: 'Intelligence',
+      value: 0,
+      mod: 0
+    },
+    wisdom: {
+      title: 'Wisdom',
+      value: 0,
+      mod: 0
+    },
+    charisma: {
+      title: 'Charisma',
+      value: 0,
+      mod: 0
+    }
+  },
+  activeNum: 0
 })
