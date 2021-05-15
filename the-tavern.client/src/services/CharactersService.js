@@ -138,7 +138,8 @@ class CharactersService {
         weapons: proficiencies.weapons !== undefined ? proficiencies.weapons : [],
         armor: proficiencies.armor !== undefined ? proficiencies.armor : [],
         tools: proficiencies.tools !== undefined ? proficiencies.tools : [],
-        skills: proficiencies.skills !== undefined ? proficiencies.skills : []
+        skills: proficiencies.skills !== undefined ? proficiencies.skills : [],
+        saves: []
       },
       equipment: {
         weapons: [],
