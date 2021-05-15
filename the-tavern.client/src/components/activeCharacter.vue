@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row my-3">
-      <StatsComponent />
+      <StatsComponent v-for="(s, key) in state.character.scores" :key="key" :stat-prop="s[key]" />
     </div>
     <div class="row">
     <!-- <EquipmentComponent /> -->

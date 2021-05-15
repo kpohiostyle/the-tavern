@@ -74,7 +74,8 @@ const Character = new Schema(
       skills: {
         type: Array,
         title: { type: String },
-        expertise: { type: Boolean }
+        expertise: { type: Boolean },
+        saves: { type: Array }
       }
     },
     equipment: {

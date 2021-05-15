@@ -84,7 +84,7 @@ export default {
       user: computed(() => AppState.user),
       async saveCharacter() {
         try {
-          AppState.character.scores = AppState.activeScores
+          // AppState.character.scores = AppState.activeScores
           AppState.activeCharacter = AppState.character
           await charactersService.saveCharacter(state.character)
         } catch (error) {
