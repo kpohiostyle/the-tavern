@@ -38,6 +38,36 @@ class CharactersService {
     console.log(AppState.proficiencies)
   }
 
+  getLanguages() {
+    const race = AppState.race
+    const background = AppState.background
+    // const languages = AppState.character.languages
+    if (race.languages[race.languages.length - 1].from !== undefined && background.languages[0]) {
+      AppState.languages.from = race.languages[race.languages.length - 1].from
+      AppState.languages.choose += race.languages[race.languages.length - 1].choose + background.languages[0].choose
+      console.log(AppState.languages.from)
+    } else if (race.languages[race.languages.length - 1].from !== undefined) {
+      AppState.languages.from = race.languages[race.languages.length - 1].from
+      AppState.languages.choose += race.languages[race.languages.length - 1].choose
+      console.log(AppState.languages.from)
+    } else if (background.languages[0]) {
+      AppState.languages.from = background.languages[0].from
+      AppState.languages.choose += race.languages[race.languages.length - 1].choose
+      console.log(AppState.languages.from)
+    }
+    // if (race.languages.choose) {
+    //   race.languages.from.forEach(l => AppState.languages.from.push(l))
+    //   choose += race.languages.choose
+    // }
+    // if (background.languages.choose) {
+    //   choose = +background.languages.choose
+    // }
+    // for (let i = 0; i < languages.length; i++) {
+    //   AppState.languages.from = AppState.languages.from.filter(l => l !== languages[i])
+    // }
+    // AppState.languages.choose = choose
+  }
+
   createCharacter() {
     const job = AppState.job
     const race = AppState.race
@@ -63,7 +93,7 @@ class CharactersService {
       health: job.health,
       proBonus: 2,
       scores: race.scores,
-      // languages: race.languages,
+      languages: race.languages,
       // abilities: job.abilities,
       spellcasting: {
         spellAbility: job.spellcasting.ability,

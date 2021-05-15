@@ -4,7 +4,12 @@
       <div class="col-md-8 col-12 p-md-5">
         <div class="shadow bg-light text-center m-3 p-md-5 p-4">
           <h2><u> You have selected a {{ state.character.race }} {{ state.character.job }}!</u> </h2>
-
+          <!-- <div v-if="state.languages.choose > 0 && state.languages < state.languagess.from.length">
+            <h3>You can learn {{ state.languagess.choose }} additional languages!</h3>
+            <div class="row justify-content-center">
+              <LanguagesComponent v-for="l in state.languagess.from" :key="l" :skill-prop="l" />
+            </div>
+          </div> -->
           <div v-if="state.skills < state.job.proficiencies.skills.choose">
             <h3>Choose {{ state.job.proficiencies.skills.choose }} of your available Skills!</h3>
             <div class="row justify-content-center">
@@ -17,6 +22,12 @@
               <ChoicesComponent v-for="(c, key) in state.job.equipment[0].choices" :key="key" :choice-prop="c" :index-prop="key" />
             </div>
           </div>
+          <!-- <div v-else>
+            <h3>Now you just need to add some personal information!</h3>
+            <div v-if="state.activeCharacter">
+
+            </div>
+          </div> -->
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary p-5 pt-5">
@@ -42,6 +53,7 @@ import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { charactersService } from '../services/CharactersService'
 import Notification from '../utils/Notification'
+// import { resultsService } from '../services/ResultsService'
 
 export default {
   name: 'Results',
@@ -49,13 +61,19 @@ export default {
     const state = reactive({
       loading: true,
       character: computed(() => AppState.character),
+      activeCharacter: computed(() => AppState.activeCharacter),
       job: computed(() => AppState.job),
       skills: computed(() => AppState.count.skills),
-      equipment: computed(() => AppState.count.equipment)
+      equipment: computed(() => AppState.count.equipment),
+      languages: computed(() => AppState.count.languages),
+      from: computed(() => AppState.languages)
     })
     onMounted(async() => {
+      // await resultsService.getEquipment()
       charactersService.createCharacter()
       charactersService.getSkills()
+      // charactersService.getLanguages()
+      AppState.activeCharacter = AppState.character
       state.loading = false
     })
     return {
