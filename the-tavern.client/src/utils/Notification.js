@@ -1,11 +1,12 @@
 import Swal from 'sweetalert2'
+import { AppState } from '../AppState'
 
 export default class Notification {
   /**
  *
  * @param {string} title The title text.
- * @param {string} text The body text.
- * @param {string} icon 'success', 'error', 'info', 'warning', or 'question'.
+ * @param {string} text The body text.question
+ * @param {string} icon 'success', 'error', 'info', 'warning', or ''.
  * @param {string} confirmButtonText The text of your confirm button.
  * -----------------------------------
  * {@link https://sweetalert2.github.io/#configuration|Check out Sweet Alerts}
@@ -52,33 +53,100 @@ export default class Notification {
     })
   }
 
-  // static async equipment(type) {
-  //   const inputOptions = new Promise((resolve) => {
-  //     setTimeout(() => {
-  //       resolve({
-  //         if(type === "Simple") {
-  //         '#ff0000': 'Red',
-  //         '#00ff00': 'Green',
-  //         '#0000ff': 'Blue'
-  //         }
+  static async weaponChoice(type) {
+    if (type === 'Martial') {
+      const { value: weapon } = await Swal.fire({
+        title: 'Select field validation',
+        input: 'select',
+        inputOptions: {
+          Melee: {
+            Battleaxe: 'Battleaxe',
+            Flail: 'Flail',
+            Glaive: 'Glaive',
+            Greataxe: 'Greataxe',
+            Greatsword: 'Greatsword',
+            Lance: 'Lance',
+            Longsword: 'Longsword',
+            Maul: 'Maul',
+            Morningstar: 'Morningstar',
+            Pike: 'Pike',
+            Rapier: 'Rapier',
+            Scimitar: 'Scimitar',
+            Shortsword: 'Shortsword',
+            Trident: 'Trident',
+            Warhammer: 'Warhammer',
+            Whip: 'Whip'
+          },
+          Ranged: {
+            Blowgun: 'Blowgun',
+            HandCrossbow: 'Hand Crossbow',
+            Shortbow: 'Shortbow',
+            Sling: 'Sling'
+          }
+        },
+        inputPlaceholder: 'Select a weapon',
+        showCancelButton: true
+      })
 
-  //       })
-  //     }, 1000)
-  //   })
+      if (weapon) {
+        Swal.fire({
+          icon: 'success',
+          title: `You chose a ${weapon}!`,
+          text: 'Quite a fine choice!'
+        })
+        AppState.character.equipment.weapons.push(weapon)
+      }
+    } else if (type === 'Simple') {
+      const { value: weapon } = await Swal.fire({
+        title: 'Select field validation',
+        input: 'select',
+        inputOptions: {
+          Melee: {
+            Club: 'Club',
+            Dagger: 'Dagger',
+            Greatclub: 'Greatclub',
+            Handaxe: 'Handaxe',
+            Javelin: 'Javelin',
+            LightHammer: 'Light Hammer',
+            Mace: 'Mace',
+            Quarterstaff: 'Quarterstaff',
+            Sickle: 'Sickle',
+            Spear: 'Spear',
+            Rapier: 'Rapier',
+            Scimitar: 'Scimitar',
+            Shortsword: 'Shortsword',
+            Trident: 'Trident',
+            Warhammer: 'Warhammer',
+            Whip: 'Whip'
+          },
+          Ranged: {
+            LightCrossbow: 'Light Crossbow',
+            Dart: 'Dart',
+            Shortbow: 'Heavy Crossbow',
+            Longbow: 'Longbow',
+            Net: 'Net'
+          }
+        },
+        inputPlaceholder: 'Select a weapon',
+        showCancelButton: true
+      })
 
-  //   const { value: color } = await Swal.fire({
-  //     title: `Select your ${type} Weapon`,
-  //     input: 'radio',
-  //     inputOptions: inputOptions,
-  //     inputValidator: (value) => {
-  //       if (!value) {
-  //         return 'You need to choose something!'
-  //       }
-  //     }
-  //   })
+      if (weapon) {
+        Swal.fire({
+          icon: 'success',
+          title: `You chose a ${weapon}!`,
+          text: 'Quite a fine choice!'
+        })
+        AppState.character.equipment.weapons.push(weapon)
+      }
+    }
+  }
 
-  //   if (color) {
-  //     Swal.fire({ html: `You selected: ${color}` })
-  //   }
-  // }
+  static notify(str) {
+    Swal.fire({
+      icon: 'success',
+      title: `${str}!`,
+      text: 'Quite a fine choice!'
+    })
+  }
 }

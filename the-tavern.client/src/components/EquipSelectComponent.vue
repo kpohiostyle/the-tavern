@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 my-2">
+  <div class="col-md-4 col-10 my-2">
     <button type="button" class="btn btn-lg btn-light" @click="addEquipment(equipmentProp)">
       <h4 class="mb-2" v-if="equipmentProp.weapon">
         <u>Weapon</u> <br>  {{ equipmentProp.weapon[0] }} x {{ equipmentProp.weapon.length }}
@@ -17,6 +17,7 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
+import Notification from '../utils/Notification'
 
 export default {
   name: 'EquipSelectComponent',
@@ -35,14 +36,21 @@ export default {
     })
     return {
       state,
-      addEquipment(obj) {
+      async addEquipment(obj) {
         if (obj.weapon) {
-          obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
+          if (obj.weapon[0] === 'Simple' || obj.weapon[0] === 'Martial') {
+            await Notification.weaponChoice(obj.weapon[0])
+          } else {
+            await Notification.notify(obj.weapon[0])
+            obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
+          }
         }
         if (obj.armor) {
+          await Notification.notify(obj.armor[0])
           obj.armor.forEach(a => AppState.character.equipment.armor.push(a))
         }
         if (obj.tool) {
+          await Notification.notify(obj.tool[0])
           obj.tool.forEach(t => AppState.character.equipment.tools.push(t))
         }
         AppState.count.equipment++

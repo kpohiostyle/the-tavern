@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary sidebar p-5 pt-5">
-        <div class="shadow bg-light text-center m-3 p-5">
+        <div class="shadow bg-light text-center m-3 p-5" v-if="state.user.isAuthenticated">
           <h2><u>Your Characters</u></h2>
           <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
         </div>
@@ -47,20 +47,22 @@
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
-// import { charactersService } from '../services/CharactersService'
 import { AppState } from '../AppState'
+// import { charactersService } from '../services/CharactersService'
 
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       loading: true,
       results: computed(() => AppState.results),
       quiz: computed(() => AppState.quiz),
       character: computed(() => AppState.character)
     })
     onMounted(async() => {
+      // await charactersService.getCharacters(state.account.id)
     })
     return {
       state
