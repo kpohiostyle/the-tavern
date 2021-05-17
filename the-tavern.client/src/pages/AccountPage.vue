@@ -2,7 +2,7 @@
   <div class="account container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-8 d-md-block d-none p-md-5">
-        <div class="row justify-content-between shadow bg-light text-center m-3 p-md-5 p-4" v-if="state.activeCharacter.name">
+        <div class="row justify-content-between shadow bg-light text-center m-3 p-md-5 p-4" v-if="state.activeCharacter.job">
           <ActiveCharacter />
         </div>
         <div class="row justify-content-between shadow bg-light text-center m-3 p-md-5 p-4" v-else>
