@@ -36,9 +36,14 @@
         </div>
       </div>
       <div class="col-4 d-md-block d-none bg-primary sidebar p-5 pt-5">
-        <div class="shadow bg-light text-center m-3 p-5" v-if="state.user.isAuthenticated">
+        <div class="shadow bg-light text-center m-3 p-5" v-if="state.user.isAuthenticated && state.characters">
           <h2><u>Your Characters</u></h2>
-          <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
+          <router-link :to="{name: 'Account'}">
+            <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
+          </router-link>
+        </div>
+        <div class="shadow bg-light text-center m-3 p-5" v-else>
+          <h2>Log in to view your character list!</h2>
         </div>
       </div>
     </div>
@@ -48,7 +53,7 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
-// import { charactersService } from '../services/CharactersService'
+import { charactersService } from '../services/CharactersService'
 
 export default {
   name: 'Home',
@@ -59,10 +64,11 @@ export default {
       loading: true,
       results: computed(() => AppState.results),
       quiz: computed(() => AppState.quiz),
-      character: computed(() => AppState.character)
+      character: computed(() => AppState.character),
+      characters: computed(() => AppState.characters)
     })
     onMounted(async() => {
-      // await charactersService.getCharacters(state.account.id)
+      await charactersService.getCharacters(state.account.id)
     })
     return {
       state

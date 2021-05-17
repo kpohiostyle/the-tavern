@@ -23,14 +23,14 @@
             </div>
           </div>
           <div v-else>
-            <h3>Now you just need to roll your Ability Scores</h3>
-            <AbilityScore />
-            <div class="row mt-5 justify-content-center text-center">
-              <div class="col-4">
-                <button type="button" class="btn btn-lg btn-primary" @click="saveCharacter">
-                  Save your Character!
-                </button>
+            <div v-if="state.chooseScores && state.mods > state.modChoice">
+              <h3>Now assign your {{ state.mods }} Ability Modifiers!</h3>
+              <div class="row justify-content-around">
+                <AbilityModsComponent v-for="m in state.chooseScores" :key="m" :mod-prop="m" />
               </div>
+            </div>
+            <div>
+              <AbilityScore />
             </div>
           </div>
         </div>
@@ -54,7 +54,6 @@
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { charactersService } from '../services/CharactersService'
-import Notification from '../utils/Notification'
 // import { resultsService } from '../services/ResultsService'
 
 export default {
@@ -65,32 +64,27 @@ export default {
       character: computed(() => AppState.character),
       activeCharacter: computed(() => AppState.activeCharacter),
       job: computed(() => AppState.job),
+      chooseScores: computed(() => AppState.chooseScores),
       skills: computed(() => AppState.count.skills),
       equipment: computed(() => AppState.count.equipment),
       languages: computed(() => AppState.count.languages),
+      mods: computed(() => AppState.count.mods),
+      modChoice: computed(() => AppState.count.modChoice),
       score: computed(() => AppState.count.score),
       from: computed(() => AppState.languages)
     })
     onMounted(async() => {
-      // await resultsService.getEquipment()
       charactersService.createCharacter()
       charactersService.getSkills()
+      charactersService.getAbilityModifiers()
+      // await resultsService.getEquipment()
       // charactersService.getLanguages()
       AppState.activeCharacter = AppState.character
       state.loading = false
     })
     return {
       state,
-      user: computed(() => AppState.user),
-      async saveCharacter() {
-        try {
-          // AppState.character.scores = AppState.activeScores
-          AppState.activeCharacter = AppState.character
-          await charactersService.saveCharacter(state.character)
-        } catch (error) {
-          Notification.toast('Error' + error, 'error')
-        }
-      }
+      user: computed(() => AppState.user)
     }
   }
 }

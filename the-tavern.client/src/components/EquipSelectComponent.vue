@@ -37,24 +37,22 @@ export default {
     return {
       state,
       async addEquipment(obj) {
-        if (obj.weapon) {
-          if (obj.weapon[0] === 'Simple' || obj.weapon[0] === 'Martial') {
-            await Notification.weaponChoice(obj.weapon[0])
-          } else {
-            await Notification.notify(obj.weapon[0])
-            obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
-          }
-        }
-        if (obj.armor) {
-          await Notification.notify(obj.armor[0])
+        if ((obj.weapon && obj.weapon[0] === 'Simple') || (obj.weapon && obj.weapon[0] === 'Martial')) {
+          await Notification.weaponChoice(obj.weapon[0])
+        } else if (obj.weapon && obj.weapon.length > 1) {
+          Notification.toast(`You chose ${obj.weapon.length} ${obj.weapon[0]}s!`, 'success')
+          obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
+        } else if (obj.weapon && obj.armor) {
+          Notification.toast(`You chose a ${obj.weapon[0]} and ${obj.armor[0]}!`, 'success')
+          obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
+        } else if (obj.armor) {
+          Notification.toast(`You chose ${obj.armor[0]}!`, 'success')
           obj.armor.forEach(a => AppState.character.equipment.armor.push(a))
-        }
-        if (obj.tool) {
-          await Notification.notify(obj.tool[0])
-          obj.tool.forEach(t => AppState.character.equipment.tools.push(t))
+        } else {
+          Notification.toast(`You chose a ${obj.weapon[0]}!`, 'success')
+          obj.weapon.forEach(w => AppState.character.equipment.weapons.push(w))
         }
         AppState.count.equipment++
-        console.log(state.character)
       }
     }
   },

@@ -1,16 +1,24 @@
 <template>
-  <div class="col-2 " dropzone="zone" @dragover.prevent @drop.prevent="moveNum(state.activeNum, statProp.title, state.activeScore)">
+  <div class="col-2 d-md-block d-none" dropzone="zone" @dragover.prevent @drop.prevent="moveNum(state.activeNum, statProp.title, state.activeScore)">
     <div class="statBox bg-light">
-      <div class="row">
-        <div class="col-12 topText">
-          <h4>{{ statProp.title }}</h4>
-        </div>
-        <div class="bottomText col-12">
-          <h3 v-if="statProp.value > 0">
-            {{ statProp.value }}
-          </h3>
-        </div>
-      </div>
+      <h3><u>{{ statProp.title }}</u></h3>
+      <h4 v-if="statProp.value > 0">
+        {{ statProp.value + statProp.mod }}
+      </h4>
+      <h5 v-if="statProp.mod > 0 && statProp.value < 1 ">
+        +{{ statProp.mod }}
+      </h5>
+    </div>
+  </div>
+  <div class="col-4 d-md-none d-block my-2" dropzone="zone" @dragover.prevent @drop.prevent="moveNum(state.activeNum, statProp.title, state.activeScore)">
+    <div class="mobileBox bg-light pt-1">
+      <h3><u>{{ statProp.title.substring(0,3).toUpperCase() }}</u></h3>
+      <h2 v-if="statProp.value > 0">
+        {{ statProp.value + statProp.mod }}
+      </h2>
+      <h5 v-if="statProp.mod > 0 && statProp.value < 1 ">
+        +{{ statProp.mod }}
+      </h5>
     </div>
   </div>
 </template>
@@ -21,11 +29,11 @@ export default {
   name: 'StatsComponent',
   props: {
     statProp: {
-      type: Number,
+      type: Object,
       required: true
     }
   },
-  setup(props) {
+  setup() {
     const state = reactive({
       abilityScore: computed(() => AppState.abilityScore),
       activeNum: computed(() => AppState.activeNum),
@@ -38,8 +46,9 @@ export default {
       state,
 
       moveNum(num, title, index) {
-        AppState.characterScores[title.toLowerCase()].value = num
+        AppState.character.scores[title.toLowerCase()].value = num
         AppState.activeScores[index] = 0
+        AppState.count.score++
       }
 
     }
@@ -54,6 +63,11 @@ export default {
  height: 7rem;
  font-size: 1rem;
 }
+.mobileBox{
+ border: 1px solid black;
+ height: 5rem;
+ font-size: 1rem;
+}
 .topText p{
   border-bottom: 1px solid black;
   padding: 0;
@@ -64,6 +78,12 @@ export default {
 }
 
 h3 {
+  font-size: 1.5rem
+}
+h4 {
   font-size: 4rem
+}
+h5 {
+  font-size: 3rem
 }
 </style>

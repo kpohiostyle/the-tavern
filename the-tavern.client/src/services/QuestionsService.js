@@ -221,9 +221,20 @@ class QuestionsService {
       question: 0,
       skills: 0,
       equipment: 0,
+      mods: 0,
+      modChoice: 0,
       score: 0
     }
     AppState.tieBreakers = []
+    AppState.activeScores = {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    }
+    AppState.activeScore = 0
   }
 }
 

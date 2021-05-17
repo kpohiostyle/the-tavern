@@ -1,16 +1,22 @@
 <template>
-  <div class="home container-fluid">
+  <div class="account container-fluid">
     <div class="row justify-content-center">
-      <div class="col-md-4 mt-2">
-        <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
-      </div>
-
-      <div class="col-md-8 d-md-block d-none">
-        <div v-if="state.activeCharacter && state.AppState.showActive">
+      <div class="col-md-8 d-md-block d-none p-md-5">
+        <div class="row justify-content-between shadow bg-light text-center m-3 p-md-5 p-4" v-if="state.activeCharacter.name">
           <ActiveCharacter />
         </div>
-        <div v-else>
-          <h1>Please select character to view details</h1>
+        <div class="row justify-content-between shadow bg-light text-center m-3 p-md-5 p-4" v-else>
+          <div class="col-12">
+            <h1 class=" text-center">
+              Please select a Character for more details
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12 bg-primary sidebar p-md-5 pt-md-5">
+        <div class="shadow bg-light text-center m-md-3 mx-1 my-3 p-md-5 p-3" v-if="state.user.isAuthenticated && state.characters">
+          <h2><u>Your Characters</u></h2>
+          <CharacterListComponent v-for="c in state.characters" :key="c.id" :character="c" />
         </div>
       </div>
     </div>
@@ -24,17 +30,22 @@
 </template>
 
 <script>
-import { computed, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
+import { charactersService } from '../services/CharactersService'
 
 export default {
   name: 'Account',
   setup() {
     const state = reactive({
+      user: computed(() => AppState.user),
       characters: computed(() => AppState.characters),
       activeCharacter: computed(() => AppState.activeCharacter),
       account: computed(() => AppState.account),
       AppState: computed(() => AppState)
+    })
+    onMounted(async() => {
+      await charactersService.getCharacters(state.account.id)
     })
     return {
       state

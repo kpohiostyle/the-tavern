@@ -16,18 +16,17 @@ export default {
   name: 'DiceNum',
   props: {
     diceProps: {
-      type: Object,
+      type: Number,
       required: true
     },
     indexProp: {
-      type: Number,
+      type: String,
       required: true
     }
   },
   setup() {
     const state = reactive({
-      abilityScore: computed(() => AppState.abilityScore),
-      score: computed(() => AppState.count.score)
+      abilityScore: computed(() => AppState.abilityScore)
     })
     onMounted(async() => {
 
@@ -38,7 +37,6 @@ export default {
       async moveNum(num, index) {
         AppState.activeNum = num
         AppState.activeScore = index
-        state.score++
       }
 
     }

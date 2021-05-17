@@ -56,7 +56,7 @@ export default class Notification {
   static async weaponChoice(type) {
     if (type === 'Martial') {
       const { value: weapon } = await Swal.fire({
-        title: 'Select field validation',
+        title: `Select your ${type} Weapon`,
         input: 'select',
         inputOptions: {
           Melee: {
@@ -89,11 +89,12 @@ export default class Notification {
       })
 
       if (weapon) {
-        Swal.fire({
-          icon: 'success',
-          title: `You chose a ${weapon}!`,
-          text: 'Quite a fine choice!'
-        })
+        this.toast(`You chose a ${weapon}!`, 'success')
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: `You chose a ${weapon}!`,
+        //   text: 'Quite a fine choice!'
+        // })
         AppState.character.equipment.weapons.push(weapon)
       }
     } else if (type === 'Simple') {
@@ -132,14 +133,82 @@ export default class Notification {
       })
 
       if (weapon) {
-        Swal.fire({
-          icon: 'success',
-          title: `You chose a ${weapon}!`,
-          text: 'Quite a fine choice!'
-        })
+        this.toast(`You chose a ${weapon}!`, 'success')
+        // Swal.fire({
+        //   icon: 'success',
+        //   title: `You chose a ${weapon}!`,
+        //   text: 'Quite a fine choice!'
+        // })
         AppState.character.equipment.weapons.push(weapon)
       }
     }
+  }
+
+  static async multiModal() {
+    await Swal.mixin({
+      title: "Don't forget personal information!",
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      progressSteps: [1, 2, 3, 4]
+    }).queue([
+      {
+        title: "What is your character's name?",
+        icon: 'question',
+        text: 'Name...'
+      },
+      {
+        title: 'How old is your character?',
+        icon: 'question',
+        input: 'range',
+        inputLabel: 'Age...',
+        inputAttributes: {
+          min: `${AppState.race.age.min}`,
+          max: `${AppState.race.age.max}`,
+          step: 1
+        }
+      },
+      {
+        title: "What is your character's gender?",
+        icon: 'question',
+        input: 'select',
+        inputOptions: {
+          Male: 'Male',
+          NonBinary: 'Non-Binary',
+          Female: 'Female'
+        },
+        inputPlaceholder: 'Gender...'
+      },
+      {
+        title: "What is your character's alignment?",
+        icon: 'question',
+        input: 'select',
+        inputOptions: {
+          Lawful: {
+            Lawful_Good: 'Good',
+            Lawful_Neutral: 'Neutral',
+            Lawful_Evil: 'Evil'
+          },
+          Neutral: {
+            Neutral_Good: 'Good',
+            True_Neutral: 'Neutral',
+            Neutral_Evil: 'Evil'
+          },
+          Chaotic: {
+            Chaotic_Good: 'Good',
+            Chaotic_Neutral: 'Neutral',
+            Chaotic_Evil: 'Evil'
+          }
+        },
+        inputPlaceholder: 'Alignment...'
+      }
+    ]).then((result) => {
+      if (result.value) {
+        AppState.character.name = result.value[0]
+        AppState.character.age = result.value[1]
+        AppState.character.gender = result.value[2]
+        AppState.character.alignment = result.value[3].replace('_', ' ')
+      }
+    })
   }
 
   static notify(str) {

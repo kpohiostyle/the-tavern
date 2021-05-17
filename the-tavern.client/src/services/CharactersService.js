@@ -15,58 +15,70 @@ class CharactersService {
     }
   }
 
-  getProficiencies(job, race, background) {
-    AppState.proficiencies += {
-      weapons: job.proficiencies.weapons !== undefined ? job.proficiencies.weapons : [],
-      armor: job.proficiencies.armor !== undefined ? job.proficiencies.armor : [],
-      tools: job.proficiencies.tools !== undefined ? job.proficiencies.tools : []
-    }
-
-    AppState.proficiencies += {
-      weapons: race.proficiencies.weapons !== undefined ? race.proficiencies.weapons : [],
-      armor: race.proficiencies.armor !== undefined ? race.proficiencies.armor : [],
-      tools: race.proficiencies.tools !== undefined ? race.proficiencies.tools : [],
-      skills: race.proficiencies.skills !== undefined ? race.proficiencies.skills : []
-    }
-
-    AppState.proficiencies += {
-      weapons: background.proficiencies.weapons !== undefined ? background.proficiencies.weapons : [],
-      armor: background.proficiencies.armor !== undefined ? background.proficiencies.armor : [],
-      tools: background.proficiencies.tools !== undefined ? background.proficiencies.tools : [],
-      skills: background.proficiencies.skills !== undefined ? background.proficiencies.skills : []
-    }
-    console.log(AppState.proficiencies)
+  getAbilityModifiers() {
+    const mods = AppState.race.scores
+    mods.forEach(m => {
+      if (m.choose === undefined) {
+        AppState.character.scores[m.title.toLowerCase()].mod = m.value
+      } else {
+        AppState.count.mods += m.choose
+        AppState.chooseScores = m.from
+      }
+    })
   }
 
-  getLanguages() {
-    const race = AppState.race
-    const background = AppState.background
-    // const languages = AppState.character.languages
-    if (race.languages[race.languages.length - 1].from !== undefined && background.languages[0]) {
-      AppState.languages.from = race.languages[race.languages.length - 1].from
-      AppState.languages.choose += race.languages[race.languages.length - 1].choose + background.languages[0].choose
-      console.log(AppState.languages.from)
-    } else if (race.languages[race.languages.length - 1].from !== undefined) {
-      AppState.languages.from = race.languages[race.languages.length - 1].from
-      AppState.languages.choose += race.languages[race.languages.length - 1].choose
-      console.log(AppState.languages.from)
-    } else if (background.languages[0]) {
-      AppState.languages.from = background.languages[0].from
-      AppState.languages.choose += race.languages[race.languages.length - 1].choose
-      console.log(AppState.languages.from)
-    }
-    // if (race.languages.choose) {
-    //   race.languages.from.forEach(l => AppState.languages.from.push(l))
-    //   choose += race.languages.choose
-    // }
-    // if (background.languages.choose) {
-    //   choose = +background.languages.choose
-    // }
-    // for (let i = 0; i < languages.length; i++) {
-    //   AppState.languages.from = AppState.languages.from.filter(l => l !== languages[i])
-    // }
-    // AppState.languages.choose = choose
-  }
+  // getProficiencies(job, race, background) {
+  //   AppState.proficiencies += {
+  //     weapons: job.proficiencies.weapons !== undefined ? job.proficiencies.weapons : [],
+  //     armor: job.proficiencies.armor !== undefined ? job.proficiencies.armor : [],
+  //     tools: job.proficiencies.tools !== undefined ? job.proficiencies.tools : []
+  //   }
+
+  //   AppState.proficiencies += {
+  //     weapons: race.proficiencies.weapons !== undefined ? race.proficiencies.weapons : [],
+  //     armor: race.proficiencies.armor !== undefined ? race.proficiencies.armor : [],
+  //     tools: race.proficiencies.tools !== undefined ? race.proficiencies.tools : [],
+  //     skills: race.proficiencies.skills !== undefined ? race.proficiencies.skills : []
+  //   }
+
+  //   AppState.proficiencies += {
+  //     weapons: background.proficiencies.weapons !== undefined ? background.proficiencies.weapons : [],
+  //     armor: background.proficiencies.armor !== undefined ? background.proficiencies.armor : [],
+  //     tools: background.proficiencies.tools !== undefined ? background.proficiencies.tools : [],
+  //     skills: background.proficiencies.skills !== undefined ? background.proficiencies.skills : []
+  //   }
+  //   console.log(AppState.proficiencies)
+  // }
+
+  // getLanguages() {
+  //   const race = AppState.race
+  //   const background = AppState.background
+  //   // const languages = AppState.character.languages
+  //   if (race.languages[race.languages.length - 1].from !== undefined && background.languages[0]) {
+  //     AppState.languages.from = race.languages[race.languages.length - 1].from
+  //     AppState.languages.choose += race.languages[race.languages.length - 1].choose + background.languages[0].choose
+  //     console.log(AppState.languages.from)
+  //   } else if (race.languages[race.languages.length - 1].from !== undefined) {
+  //     AppState.languages.from = race.languages[race.languages.length - 1].from
+  //     AppState.languages.choose += race.languages[race.languages.length - 1].choose
+  //     console.log(AppState.languages.from)
+  //   } else if (background.languages[0]) {
+  //     AppState.languages.from = background.languages[0].from
+  //     AppState.languages.choose += race.languages[race.languages.length - 1].choose
+  //     console.log(AppState.languages.from)
+  //   }
+  //   // if (race.languages.choose) {
+  //   //   race.languages.from.forEach(l => AppState.languages.from.push(l))
+  //   //   choose += race.languages.choose
+  //   // }
+  //   // if (background.languages.choose) {
+  //   //   choose = +background.languages.choose
+  //   // }
+  //   // for (let i = 0; i < languages.length; i++) {
+  //   //   AppState.languages.from = AppState.languages.from.filter(l => l !== languages[i])
+  //   // }
+  //   // AppState.languages.choose = choose
+  // }
 
   createCharacter() {
     const job = AppState.job
@@ -81,7 +93,6 @@ class CharactersService {
       age: null,
       gender: '',
       alignment: '',
-      imgUrl: '',
       role: job.role,
       style: job.style,
       job: job.title,
@@ -92,38 +103,8 @@ class CharactersService {
       speed: race.speed,
       health: job.health,
       proBonus: 2,
-      scores: [
-        {
-          title: 'Strength',
-          value: 0,
-          mod: 0
-        },
-        {
-          title: 'Dexterity',
-          value: 0,
-          mod: 0
-        },
-        {
-          title: 'Constitution',
-          value: 0,
-          mod: 0
-        },
-        {
-          title: 'Intelligence',
-          value: 0,
-          mod: 0
-        },
-        {
-          title: 'Wisdom',
-          value: 0,
-          mod: 0
-        },
-        {
-          title: 'Charisma',
-          value: 0,
-          mod: 0
-        }
-      ],
+      imgUrl: 'http://www.fillmurray.com/g/300/300',
+      scores: AppState.characterScores,
       languages: race.languages,
       // abilities: job.abilities,
       spellcasting: {
@@ -151,6 +132,7 @@ class CharactersService {
   }
 
   async saveCharacter(body) {
+    AppState.activeCharacter = AppState.character
     await api.post('api/characters', body)
     router.push('Account')
   }
