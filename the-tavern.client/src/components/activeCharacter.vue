@@ -6,6 +6,7 @@
     <h2><u> <span class="editName" @click.stop="" spellcheck="false" contenteditable="true" @blur="editName"> {{ state.character.name || 'Add Name' }}</span> </u></h2>
     <h3>The {{ state.character.race }} {{ state.character.job }}</h3>
     <h3>{{ state.character.alignment }}</h3>
+    <h4>{{ state.character.gender }}: {{ state.character.age }} Years Old</h4>
     <h4>{{ state.character.health }} Hit Points</h4>
     <h4>{{ state.character.speed }}ft of Movement</h4>
   </div>
