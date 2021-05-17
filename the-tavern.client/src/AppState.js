@@ -90,14 +90,7 @@ export const AppState = reactive({
   rawData: [],
   showActive: false,
   abilityScore: [],
-  activeScores: {
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0
-  },
+  activeScores: {},
   activeScore: 0,
   characterScores: {
     strength: {
@@ -131,5 +124,6 @@ export const AppState = reactive({
       mod: 0
     }
   },
-  activeNum: 0
+  activeNum: 0,
+  chooseScores: []
 })

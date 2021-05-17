@@ -1,11 +1,16 @@
 <template>
   <!-- TODO get the toggle to dissappear on anything larger than a medium -->
-  <div class="row justify-content-center px-md-3">
-    <div class="col-12 shadow mb-2 py-2 bg-light" @click="setActiveCharacter(character.id) ">
-      <h5>
-        <u>{{ character.job }}</u>
-      </h5>
-      <p>{{ character.race }}</p>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <button type="button" class="btn btn-lg btn-dark w-100" @click="setActiveCharacter(character.id)">
+        <h3>
+          <u>{{ character.name }}</u>
+        </h3>
+        <h4>The {{ character.race }} {{ character.job }}</h4>
+        <h5 class="p-0 m-0">
+          {{ character.alignment }}
+        </h5>
+      </button>
       <transition name="fade">
         <div class="d-md-none d-block" v-if="state.show">
           <ActiveCharacter />
@@ -55,10 +60,7 @@ export default {
 }
 </script>
 <style scoped>
-h5{
+h3{
   font-size: 2rem;
-}
-p{
-  font-size: 1.25rem;
 }
 </style>

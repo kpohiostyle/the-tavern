@@ -1,18 +1,15 @@
 <template>
-  <div>
-    <div class="row my-5">
-      <div class="col-md-4 text-center">
-        <img src="//placehold.it/250x250" class="w-100" alt="">
-      </div>
-      <div class="col-md-6 shadow bg-light">
-        <h5>Name: <span class="editName" @click.stop="" spellcheck="false" contenteditable="true" @blur="editName"> {{ state.character.name || 'Add Name' }}</span></h5>
-        <p>Job: {{ state.character.job }}</p>
-        <p>Race: {{ state.character.race }}</p>
-        <p>Speed: {{ state.character.speed }}</p>
-        <p>Hit Points: {{ state.character.health }}</p>
-      </div>
-    </div>
-    <div class="row pr-md-5 mr-md-5 px-2">
+  <div class="col-md-4 col-12 py-md-0 py-3">
+    <img :src="state.character.imgUrl" class="img-fluid" alt="">
+  </div>
+  <div class="col-md-6 col-12 text-left">
+    <h2><u> <span class="editName" @click.stop="" spellcheck="false" contenteditable="true" @blur="editName"> {{ state.character.name || 'Add Name' }}</span> </u></h2>
+    <h3>The {{ state.character.race }} {{ state.character.job }}</h3>
+    <h3>{{ state.character.alignment }}</h3>
+    <h4>{{ state.character.health }} Hit Points</h4>
+    <h4>{{ state.character.speed }}ft of Movement</h4>
+  </div>
+  <!-- <div class="row pr-md-5 mr-md-5 px-2">
       <div class="about col-12">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut labore corporis velit
@@ -23,12 +20,11 @@
           Sit ullam, sapiente rerum qui recusandae autem cumque ex voluptate!
         </p>
       </div>
-    </div>
-    <div class="row my-3">
-      <StatsComponent v-for="(s, key) in state.character.scores" :key="key" :stat-prop="s[key]" />
-    </div>
-    <div class="row">
-    <!-- <EquipmentComponent /> -->
+    </div> -->
+  <div class="col-12 mt-md-5">
+    <h2><u>{{ state.character.name }}'s Abilities</u></h2>
+    <div class="row mt-md-3">
+      <StatsComponent v-for="(s, key) in state.character.scores" :key="key" :stat-prop="s" />
     </div>
   </div>
 </template>

@@ -7,8 +7,8 @@ export class CharactersController extends BaseController {
     super('api/characters')
     this.router
     // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getCharacters)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.saveCharacter)
       .put('/:id', this.editCharacter)
       .delete('/:id', this.deleteCharacter)

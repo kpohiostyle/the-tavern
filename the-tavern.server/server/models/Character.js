@@ -21,7 +21,6 @@ const Character = new Schema(
     armorRating: { type: Number },
     proBonus: { type: Number },
     scores: {
-      type: Array,
       strength: {
         title: { type: String },
         value: { type: Number },
