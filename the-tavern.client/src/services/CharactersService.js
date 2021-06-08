@@ -128,7 +128,6 @@ class CharactersService {
         tools: job.tools
       }
     }
-    console.log(AppState.character)
   }
 
   async saveCharacter(body) {
